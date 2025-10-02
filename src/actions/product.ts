@@ -45,11 +45,51 @@ export const getFilteredProducts = async ({
         throw new Error(error.message);
     }
 
-    return { products, count };
-
-    
-    
+    return { products, count };    
 }
+
+export const getRecentProducts = async () => {
+    const { data: products, error } = await supabase
+    .from('products')
+    .select(`
+        *,
+        variants(*)
+    `)
+    .order('created_at', { ascending: false })
+    .limit(4);
+
+    if(error) {
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+    
+    return products;
+}
+
+export const getRandomProducts = async () => {
+    const { data: products, error } = await supabase
+    .from('products')
+    .select(`
+        *,
+        variants(*)
+    `)
+    .limit(20);
+
+    if(error) {
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+
+    // select 4 random products radomly from the 20 products
+    const radomProducts = products
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 4);
+    
+    return radomProducts;
+}
+
+
+
 
 
 

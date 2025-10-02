@@ -4,6 +4,7 @@ import { CardProducts } from '../components/home/products/CardProducts'
 import { ContainerFilter } from '../components/home/products/ContainerFilter'
 import { useFilteredProducts } from '../hooks'
 import { useState } from 'react'
+import { Pagination } from '../components/shared/Pagination'
 
 
 export const SocioPage = () => {
@@ -55,6 +56,11 @@ export const SocioPage = () => {
                                         </div>
                                     ))}
                     </div>
+                    <Pagination
+                        totalItems={totalProducts}
+                        page={page}
+                        setPage={setPage}    
+                    />
                 </div>
                 )
         }
