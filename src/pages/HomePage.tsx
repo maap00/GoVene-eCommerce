@@ -33,7 +33,7 @@ export const HomePage = () => {
         title='Productos Destacados 2'
         products={preparedrecentCelularesProducts } // Example products
         />)
-      }      
+      }       
       <Brands/> 
     </div>
   )
