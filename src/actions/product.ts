@@ -106,6 +106,22 @@ export const getProductBySlug = async (slug: string) => {
     return products;
 }
 
+export const searchProducts = async (searchTerm: string) => {
+    const { data: products, error } = await supabase
+    .from('products')
+    .select(`
+        *,
+        variants(*)
+    `)
+   .ilike('name', `%${searchTerm}%`); //to look for similar names
+
+   if(error) {
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+    
+    return products;
+}
 
 
 

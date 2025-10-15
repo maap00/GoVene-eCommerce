@@ -11,6 +11,7 @@ import { useProduct } from "../hooks/products/useProduct"
 import type { VariantsProducts } from "../interface"
 import { Tag } from "../components/shared/Tag"
 import { Loader } from "../components/shared/Loader"
+import { userCounterStore } from "../store/counter.store"
 interface Acc {
     [key: string]: {
         name: string;
@@ -28,6 +29,10 @@ export const SocioSingleProduct = () => {
     const [selectedStorage, setSelectedStorage] = useState<string | null>(null);    
 
     const [selectedVariant, setSelectedVariant] = useState<VariantsProducts | null>(null)
+
+    const count = userCounterStore((state) => state.count);
+    const increment = userCounterStore((state) => state.increment);
+    const decrement = userCounterStore((state) => state.decrement);     
 
     const colors = useMemo (() => {
         return product?.variants.reduce(
@@ -188,11 +193,11 @@ return (
                         Cantidad:
                     </p>
                     <div className="flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full">
-                        <button>
-                            <LuMinus size={15} />
+                        <button onClick={decrement}  disabled={count === 1}>
+                            <LuMinus size={15} />                                                    
                         </button>
-                        <span className="text-slate-500 text-sm">1</span>
-                        <button>
+                        <span className="text-slate-500 text-sm">{count}</span>
+                        <button onClick={increment}>
                             <LuPlus size={15} />
                         </button>
                     </div>
