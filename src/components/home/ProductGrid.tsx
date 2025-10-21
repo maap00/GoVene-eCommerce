@@ -1,5 +1,5 @@
 import type { PrepareProductData } from "../../interface";
-import { CardProducts } from "./products/CardProducts";
+import { CardProduct } from "../products/CardProduct";
 
 interface Props{
     title: string;
@@ -16,7 +16,7 @@ export const ProductGrid = ({ title , products }: Props) => {
                 <div className="flex flex-col gap-3 relative" 
                      key={product.id}
                      >
-                    <CardProducts 
+                    <CardProduct 
                     img={product.images[0]} 
                     name={product.name}
                     price={product.price}

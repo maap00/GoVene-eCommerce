@@ -3,15 +3,17 @@ import { Separator } from "../components/shared/Separator"
 import {formatPrice} from "../helpers"
 import { CiDeliveryTruck } from "react-icons/ci"
 import { BsChatLeftText } from "react-icons/bs"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { ProductDescription } from "../components/one-product/ProductDescription"
 import { GridImages } from "../components/one-product/GridImages"
-import { use, useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useProduct } from "../hooks/products/useProduct"
 import type { VariantsProducts } from "../interface"
 import { Tag } from "../components/shared/Tag"
 import { Loader } from "../components/shared/Loader"
 import { userCounterStore } from "../store/counter.store"
+import { useCartStore } from "../store/cart.store"
+import toast from "react-hot-toast"
 interface Acc {
     [key: string]: {
         name: string;
@@ -22,7 +24,9 @@ interface Acc {
 export const SocioSingleProduct = () => {
     const { slug } = useParams<{slug: string}>();
 
-    const {product, isLoading, isError} = useProduct(slug || '');
+    const [currentSlug, setCurrentSlug] = useState(slug)
+
+    const {product, isLoading, isError} = useProduct(currentSlug || '');
 
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
@@ -32,7 +36,11 @@ export const SocioSingleProduct = () => {
 
     const count = userCounterStore((state) => state.count);
     const increment = userCounterStore((state) => state.increment);
-    const decrement = userCounterStore((state) => state.decrement);     
+    const decrement = userCounterStore((state) => state.decrement);    
+    
+    const addItem = useCartStore((state) => state.addItem)
+
+    const navigate = useNavigate();
 
     const colors = useMemo (() => {
         return product?.variants.reduce(
@@ -88,6 +96,51 @@ export const SocioSingleProduct = () => {
 
     const outOffStock = selectedVariant?.stock === 0; 
 
+    const addToCard = () => {
+        if(selectedVariant){
+            addItem({
+                variantId: selectedVariant.id,
+                productId: product?.id || '',
+                name: product?.name || '',
+                image: product?.images[0] || '',
+                color: selectedVariant.color_name,
+                storage: selectedVariant.storage,
+                price: selectedVariant.price,
+                quantity: count,
+            });
+             toast.success('Product added', {
+                position: 'bottom-right'
+            });
+        }
+
+    }
+
+    const buyNow = () => {
+        if(selectedVariant){
+            addItem({
+                variantId: selectedVariant.id,
+                productId: product?.id || '',
+                name: product?.name || '',
+                image: product?.images[0] || '',
+                color: selectedVariant.color_name,
+                storage: selectedVariant.storage,
+                price: selectedVariant.price,
+                quantity: count,
+            });
+            navigate('/')
+    }}
+
+    //Reset current slug when change url  
+
+    useEffect(() => {
+        setCurrentSlug(slug);
+        setSelectedColor(null);
+        setSelectedStorage(null);
+        setSelectedVariant(null);
+    }, [slug])
+
+
+
     if(isLoading) return <Loader />
  
     if(!product || isError) {
@@ -96,12 +149,7 @@ export const SocioSingleProduct = () => {
                 <p>Producto no encontrado</p>
             </div>
         )
-    }
-
-    
-   
-
- 
+    } 
 
 return (
 <>
@@ -204,10 +252,12 @@ return (
                 </div>
                 <div className="flex flex-col-3">
                     <button
-                        className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[$e2e2e2]"></button>
+                        className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[$e2e2e2]"
+                        onClick={addToCard}></button>
                     Agregar al carrito
                     <button
-                        className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full">
+                        className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full"
+                        onClick={buyNow}>
                         Comprar ahora
                     </button>
                 </div>

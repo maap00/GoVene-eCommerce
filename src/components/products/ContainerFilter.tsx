@@ -1,5 +1,4 @@
-import { Separator } from "../../shared/Separator"
-import { Brands } from "../Brands"
+import { Separator } from "../shared/Separator";
 
 const availableFilters = [
     'Samsung',

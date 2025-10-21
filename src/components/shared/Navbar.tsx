@@ -1,14 +1,15 @@
-import React from 'react'
 import { navbarLinks } from '../../constants/links'
 import { NavLink,Link } from 'react-router-dom'
 import { HiOutlineSearch, HiOutlineShoppingBag } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
-import { Logo } from '../Logo'
+import { Logo } from './Logo'
 import { useGlobalStore } from '../../store/global.store'
+import { useCartStore } from '../../store/cart.store'
 
 export const Narbar = () => {
   const openSheet = useGlobalStore((state) => state.openSheet);
   const setActiveNavMobile = useGlobalStore((state) => state.setActiveNavMobile);
+  const totalItemsInCart = useCartStore((state) => state.totalItemsInCart)
 
 
   return (
@@ -45,7 +46,7 @@ export const Narbar = () => {
 
           <button className="relative" onClick={() => openSheet('cart')}>
               <span className="absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full">
-              0
+              {totalItemsInCart}
               </span>
               <HiOutlineShoppingBag size={25} />
           </button> 

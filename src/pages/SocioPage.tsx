@@ -1,10 +1,10 @@
 
 import { prepareProductData } from '../helpers'
-import { CardProducts } from '../components/home/products/CardProducts'
-import { ContainerFilter } from '../components/home/products/ContainerFilter'
 import { useFilteredProducts } from '../hooks'
 import { useState } from 'react'
 import { Pagination } from '../components/shared/Pagination'
+import { CardProduct } from '../components/products/CardProduct'
+import { ContainerFilter } from '../components/products/ContainerFilter'
 
 
 export const SocioPage = () => {
@@ -45,7 +45,7 @@ export const SocioPage = () => {
                                         <div className="flex flex-col gap-3 relative" 
                                             key={product.id}
                                             >
-                                            <CardProducts 
+                                            <CardProduct
                                             img={product.images[0]} 
                                             name={product.name}
                                             price={product.price}

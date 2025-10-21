@@ -4,8 +4,8 @@ import { IoMdClose } from 'react-icons/io';
 import { useGlobalStore } from '../../store/global.store';
 import { formatPrice } from '../../helpers';
 import { searchProducts } from '../../actions';
-import { ProductDescription } from '../one-product/ProductDescription';
 import type { Product } from '../../interface';
+import { useNavigate } from 'react-router-dom';
 
 export const Search = () => {
 
@@ -22,6 +22,8 @@ const handleSearch = async(e: React.FormEvent) => {
   setSearchResult(products)
   }
 } 
+
+const navigate = useNavigate();
 
 return (
 <>
@@ -42,7 +44,11 @@ return (
     <ul>
       {searchResult.map(product => (
         <li className="py-2 group">
-        <button className="flex items-center gap-3">
+        <button className="flex items-center gap-3"
+                onClick={() => {
+                  navigate(`/products/${product.slug}`);
+                  closeSheet();
+                }}>
           <img src={product.images[0]} alt={product.name} className="h-20 w-20 object-contain p-3" />
         </button>
         <div className="flex flex-col gap-1">
