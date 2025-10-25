@@ -1,0 +1,107 @@
+import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form"
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LuLoader } from "react-icons/lu";
+
+
+
+import { z } from 'zod'
+import { useRegister } from '../hooks/auth/useRegister';
+
+export const userRegisterSchema = z.object({
+email: z.string().email('Invalid email'),
+password: z
+.string()
+.min(6, 'Password would include min 6 characters'),
+fullName: z.string().min(1, 'Name is requested'),
+phone: z.string().optional()
+});
+
+export type UserRegisterFormValues = z.infer<typeof userRegisterSchema>;
+
+  export const RegisterPage = () => {
+
+
+  const {
+  register,
+  handleSubmit,
+  formState: { errors }
+  } = useForm<UserRegisterFormValues>({
+    defaultValues: {
+    fullName: '',
+    email: '',
+    password: '',
+    phone: '',
+    },
+    resolver: zodResolver(userRegisterSchema),
+    });
+
+    const { mutate, isPending } = useRegister();
+
+
+    const onRegister = handleSubmit(data => {
+
+    const { email, password, fullName, phone} = data;
+
+    mutate({email, password, fullName,phone});
+    });
+
+    console.log(errors);
+
+    return (
+    <div className="h-full flex flex-col items-center mt-12 gap-5">
+      <h1 className="text-4xl font-bold capitalize">
+        Create new Accound
+      </h1>
+      { isPending ? (
+        <div className="w-full h-full flex justify-center mt-20">
+          <LuLoader className='animate-spin' size={60}/>
+        </div>
+      ) : (
+        <>
+          <form action="" className="flex flex-col items-center gap-4 w-full mt-10 sm:w-[400px] lg:w-[500px]"
+            onSubmit={onRegister}>
+            <input type="text"
+              className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
+              placeholder='Name' {...register('fullName')} />
+            {errors.fullName &&
+            <p className='text-red-500'>{errors.fullName.message}</p>}
+
+            <input type="text"
+              className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
+              placeholder='Phone' {...register('phone')} />
+            {errors.phone &&
+            <p className='text-red-500'>{errors.phone.message}</p>}
+
+
+            <input type="email"
+              className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
+              placeholder='Insert email' {...register('email')} />
+            {errors.email &&
+            <p className='text-red-500'>{errors.email.message}</p>}
+
+
+            <input type="password"
+              className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
+              placeholder='Insert password' {...register('password')} />
+            {errors.password &&
+            <p className='text-red-500'>{errors.password.message}</p>}
+
+
+            <button
+              className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full mt-5 w-full">
+              Sign Up
+            </button>
+          </form>
+          <p className="text-sm text-stone-800">
+            <Link to='/login' className="underline ml-2">
+            Already Registered? Login
+            </Link>
+          </p>
+        </>
+
+      )}
+
+    </div>
+    )
+    }
