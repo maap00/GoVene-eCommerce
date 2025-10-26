@@ -1,7 +1,8 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { RootLayout } from '../layouts/RootLayout'
-import { AboutPage, HomePage, LoginPage, ProductPage, RegisterPage, SocioSingleProduct } from '../pages'
+import { AboutPage, HomePage, LoginPage, OrdersUserPage, ProductPage, RegisterPage, SocioSingleProduct } from '../pages'
 import { SocioPage } from '../pages/SocioPage'
+import { ClientLayout } from '../layouts/ClientLayout'
 
 export const router = createBrowserRouter([
     {
@@ -28,6 +29,19 @@ export const router = createBrowserRouter([
         },{
             path: 'register',
             element: <RegisterPage/>,
+        },{
+            path: 'account',
+            element: <ClientLayout/>,
+            children:[
+                {
+                path: '',
+                element: <Navigate to='/account/orders'/>,
+                },
+                {
+                path: 'orders',
+                element: <OrdersUserPage/>
+                }
+            ]
         }
         ],
     },

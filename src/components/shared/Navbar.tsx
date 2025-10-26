@@ -1,15 +1,21 @@
 import { navbarLinks } from '../../constants/links'
 import { NavLink,Link } from 'react-router-dom'
-import { HiOutlineSearch, HiOutlineShoppingBag } from 'react-icons/hi'
+import { HiOutlineSearch, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { Logo } from './Logo'
 import { useGlobalStore } from '../../store/global.store'
 import { useCartStore } from '../../store/cart.store'
+import { useUser } from '../../hooks'
+import { Loading } from './Loading'
 
 export const Narbar = () => {
   const openSheet = useGlobalStore((state) => state.openSheet);
   const setActiveNavMobile = useGlobalStore((state) => state.setActiveNavMobile);
   const totalItemsInCart = useCartStore((state) => state.totalItemsInCart)
+
+  const { session , isLoading} = useUser();
+
+  const userId = session?.user.id;
 
 
   return (
@@ -35,14 +41,25 @@ export const Narbar = () => {
             <HiOutlineSearch size={25}/>
           </button>
 
-          <div className="relative">
-            <Link 
-                to="/account"
-                className="border-2 border-slade-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold"
-                >
-                  M
-            </Link>
-          </div>
+          { isLoading ? (
+
+              <Loading/>
+
+            ) : session ? (
+              <div className="relative">
+                <Link 
+                    to="/account"
+                    className="border-2 border-slade-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold"
+                    >
+                      M
+                </Link>
+            </div>
+            ) : (
+              <Link to='/login'>
+                <HiOutlineUser size={25}/>
+              </Link>
+            )
+          }
 
           <button className="relative" onClick={() => openSheet('cart')}>
               <span className="absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full">

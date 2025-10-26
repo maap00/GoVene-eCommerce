@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LuLoader } from "react-icons/lu";
 
 
 
 import { z } from 'zod'
-import { useRegister } from '../hooks/auth/useRegister';
+import { useRegister, useUser } from '../hooks';
+import { Loading } from '../components/shared/Loading';
+import { Loader } from '../components/shared/Loader';
 
 export const userRegisterSchema = z.object({
 email: z.string().email('Invalid email'),
@@ -38,6 +39,9 @@ export type UserRegisterFormValues = z.infer<typeof userRegisterSchema>;
 
     const { mutate, isPending } = useRegister();
 
+    const {session, isLoading} = useUser();
+    
+
 
     const onRegister = handleSubmit(data => {
 
@@ -46,17 +50,18 @@ export type UserRegisterFormValues = z.infer<typeof userRegisterSchema>;
     mutate({email, password, fullName,phone});
     });
 
-    console.log(errors);
+ 
+    if (isLoading) return <Loader/>;
+
+    if(session) return <Navigate to='/'/>;
 
     return (
     <div className="h-full flex flex-col items-center mt-12 gap-5">
       <h1 className="text-4xl font-bold capitalize">
         Create new Accound
       </h1>
-      { isPending ? (
-        <div className="w-full h-full flex justify-center mt-20">
-          <LuLoader className='animate-spin' size={60}/>
-        </div>
+      { isPending ? (      
+        <Loading/>
       ) : (
         <>
           <form action="" className="flex flex-col items-center gap-4 w-full mt-10 sm:w-[400px] lg:w-[500px]"
