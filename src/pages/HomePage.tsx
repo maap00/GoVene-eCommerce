@@ -3,7 +3,7 @@ import { ProductGrid } from '../components/home/ProductGrid'
 import { Brands } from '../components/home/Brands'
 import { prepareProductData } from '../helpers'
 import { useHomeProducts } from '../hooks'
-import { ProductGridSkeleton } from '../components/skeletons/productGridSkeleton'
+import { ProductGridSkeleton } from '../components/skeletons/ProductGridSkeleton'
 
 export const HomePage = () => {
 

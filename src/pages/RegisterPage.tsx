@@ -4,21 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 
 
-import { z } from 'zod'
 import { useRegister, useUser } from '../hooks';
 import { Loading } from '../components/shared/Loading';
 import { Loader } from '../components/shared/Loader';
+import { userRegisterSchema, type UserRegisterFormValues } from '../lib/validators';
 
-export const userRegisterSchema = z.object({
-email: z.string().email('Invalid email'),
-password: z
-.string()
-.min(6, 'Password would include min 6 characters'),
-fullName: z.string().min(1, 'Name is requested'),
-phone: z.string().optional()
-});
 
-export type UserRegisterFormValues = z.infer<typeof userRegisterSchema>;
 
   export const RegisterPage = () => {
 
