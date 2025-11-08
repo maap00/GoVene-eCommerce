@@ -23,7 +23,7 @@ export const ThanksyouPage = () => {
 	}, [navigate]);
 
 
-  if(isError) return <div>Loading data error</div>
+  	if(isError) return <div>Loading data error</div>
 
 	if (isLoading || !data || isLoadingSession) return <Loader />;
 
@@ -162,7 +162,7 @@ export const ThanksyouPage = () => {
 					</p>
 
 					<Link
-						to='/celulares'
+						to='/'
 						className='text-white bg-black py-4 text-sm rounded-md px-5 tracking-tight font-semibold'
 					>
 						Seguir comprando

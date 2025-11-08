@@ -1,12 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Logo } from '../components/shared/Logo'
 import { useCartStore } from '../store/cart.store';
 import { FormCheckout } from '../components/checkout/FormCheckout';
 import { ItemsCheckout } from '../components/checkout/ItemsCheckout';
+import { useUser } from '../hooks';
+import { supabase } from '../supabase/client';
+import { Loader } from '../components/shared/Loader';
 
 export const CheckoutPage = () => {
     const totalItems = useCartStore((state) => state.totalItemsInCart);
+
+    const navigate = useNavigate();
+
+    const { isLoading } = useUser()
+
+    useEffect(() => {
+            supabase.auth.onAuthStateChange( async (event,session) => {
+                if(event === 'SIGNED_OUT' || !session ) {
+                    navigate('/login');
+                }
+            });
+        }, [navigate]);
+
+    if(isLoading) return <Loader/>
     
 return (
 <div style={{

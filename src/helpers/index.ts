@@ -40,3 +40,29 @@ export const prepareProductData = (products: Product[]) => {
         };
     });
 };
+
+export const formatDateLong = (date : string): string => {
+    const dateObject = new Date(date);
+
+    return dateObject.toLocaleTimeString('es-Es' ,{
+        year: 'numeric',
+        month:'long',
+        day: 'numeric',
+    })
+
+}
+
+export const getStatus = (status: string): string => {
+	switch (status) {
+		case 'pending':
+			return 'Pendiente';
+		case 'paid':
+			return 'Pagado';
+		case 'shipped':
+			return 'Enviado';
+		case 'delivered':
+			return 'Entregado';
+		default:
+			return status;
+	}
+};

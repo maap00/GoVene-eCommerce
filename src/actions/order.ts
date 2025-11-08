@@ -1,5 +1,4 @@
-import { RiContrastDropLine } from "react-icons/ri";
-import { OrderInput } from "../interface";
+import type { OrderInput } from "../interface";
 import { supabase } from "../supabase/client";
 
 export const createOrder = async (order: OrderInput) => {
@@ -78,7 +77,7 @@ export const createOrder = async (order: OrderInput) => {
         customer_id: customeId,
         address_id: addressDate.id,
         total_amount: order.totalAmount,
-        status: 'pending',
+        status: 'Pending',
     })
     .select()
     .single();
