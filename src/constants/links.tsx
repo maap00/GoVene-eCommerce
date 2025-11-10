@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaTiktok, FaXTwitter } from "react-icons/fa6"
+import { FaBoxOpen, FaCartShopping, FaFacebook, FaInstagram, FaTiktok, FaXTwitter } from "react-icons/fa6"
 
 
 export const navbarLinks = [{
@@ -40,5 +40,21 @@ export const socialMedia = [{
     href: '/',
     icon: <FaFacebook/>       
 }]
+
+
+export const dashboardLinks = [
+    {
+        id: 1,
+        title: 'Productos',
+        href: '/dashboard/products',
+        icon: <FaBoxOpen size={25}/>
+    },
+    {
+        id: 2,
+        title: 'Ordenes',
+        href: '/dashboard/orders',
+        icon: <FaCartShopping size={25}/>
+    }
+]
 
 
