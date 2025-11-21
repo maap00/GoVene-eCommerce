@@ -14,3 +14,4 @@ export * from './OrderUserPage'
 // DASHBOARD
 
 export * from './dashboard/DashboardProductsPage'
+export * from './dashboard/DashboardNewProductPage'
