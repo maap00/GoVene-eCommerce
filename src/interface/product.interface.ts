@@ -1,3 +1,5 @@
+import type { JSONContent } from "@tiptap/react";
+
 type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export interface Color {
@@ -7,13 +9,13 @@ export interface Color {
 }
 
 export interface VariantsProducts {
-        [x: string]: any;
-        id: string;
-        stock: number;
-        price: number;
-        storage: string;
-        color: string;
-        color_name: string;
+    [x: string]: unknown;
+    id: string;
+    stock: number;
+    price: number;
+    storage: string;
+    color: string;
+    color_name: string;
 }
 
 export interface Product {
@@ -25,7 +27,7 @@ export interface Product {
     description: Json;
     images: string[];
     created_at: string;
-    variants: VariantsProducts[];    
+    variants: VariantsProducts[];
 }
 
 export interface PrepareProductData {
@@ -38,9 +40,30 @@ export interface PrepareProductData {
     images: string[];
     created_at: string;
     price: number;
-    variants: VariantsProducts[]; 
+    variants: VariantsProducts[];
     colors: Color[];
 }
+
+export interface ProductInput {
+    name: string;
+    brand: string;
+    slug: string;
+    features: string[];
+    description: JSONContent;
+    images: File[];
+    variants: VariantsInput[];
+}
+
+
+export interface VariantsInput {
+    id?: string;
+    stock: number;
+    price: number;
+    storage: string;
+    color: string;
+    colorName: string;
+}
+
 
 
 

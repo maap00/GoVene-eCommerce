@@ -9,6 +9,7 @@ export * from './OrdersUserPage'
 export * from './CheckoutPage'
 export * from './ThanksyouPage'
 export * from './OrderUserPage'
+export * from './WelcomePage';
 
 
 // DASHBOARD

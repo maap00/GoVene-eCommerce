@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Outlet, useLocation } from 'react-router-dom'
 import { Narbar } from '../components/shared/Navbar'
 import { Footer } from '../components/shared/Footer'
@@ -10,33 +10,33 @@ import { NavbarMobile } from '../components/shared/NavbarMobile'
 
 export const RootLayout = () => {
 
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
 
     const isSheetOpen = useGlobalStore((state) => state.isSheetOpen);
 
     const activeNavMobile = useGlobalStore((state) => state.activeNavMobile);
 
-  return (
-    <div className='h-screen flex flex-col font-montserrat'>
-        <Narbar/>
+    return (
+        <div className='h-screen flex flex-col font-montserrat'>
+            <Narbar />
 
-        {pathname === '/' && (
-            <Banner/>
-        )}
+            {pathname === '/home' && (
+                <Banner />
+            )}
 
-        <main className="container my-8 flex-1">
-            <Outlet/> {/* Componente para renderizar rutas hijas */}
-        </main>
+            <main className="container my-8 flex-1">
+                <Outlet /> {/* Componente para renderizar rutas hijas */}
+            </main>
 
-        {pathname === '/' && (
-            <Newletters/>
-        )}
+            {pathname === '/' && (
+                <Newletters />
+            )}
 
-        {isSheetOpen && <Sheet/>}
+            {isSheetOpen && <Sheet />}
 
-        {activeNavMobile && <NavbarMobile/>}
+            {activeNavMobile && <NavbarMobile />}
 
-        <Footer/>  
-    </div>
-  )
+            <Footer />
+        </div>
+    )
 }

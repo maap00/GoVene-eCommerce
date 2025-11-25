@@ -7,35 +7,34 @@ import { ProductGridSkeleton } from '../components/skeletons/ProductGridSkeleton
 
 export const HomePage = () => {
 
-  const { recentProducts, popularProducts, isLoading, error } = useHomeProducts();
-  
+  const { recentProducts, popularProducts, isLoading } = useHomeProducts();
+
   const preparedPopularCelularesProducts = prepareProductData(popularProducts);
   const preparedrecentCelularesProducts = prepareProductData(recentProducts);
   return (
     <div>
-      <FeatureGrid/>
+      <FeatureGrid />
 
-      { isLoading ?  
-        (<ProductGridSkeleton 
-        numberOfProducts={4}/> )
-       :  
-        ( <ProductGrid
-        title='Productos Destacados'
-        products={preparedPopularCelularesProducts } // Products to display radomly
-        />)
-       }
-
-      { isLoading ? 
-        (<ProductGridSkeleton 
-          numberOfProducts={4}/> )
-       :  
+      {isLoading ?
+        (<ProductGridSkeleton
+          numberOfProducts={4} />)
+        :
         (<ProductGrid
-        title='Productos Destacados 2'
-        products={preparedrecentCelularesProducts } // Example products
+          title='Productos Destacados'
+          products={preparedPopularCelularesProducts} // Products to display radomly
         />)
-      }       
-      <Brands/> 
+      }
+
+      {isLoading ?
+        (<ProductGridSkeleton
+          numberOfProducts={4} />)
+        :
+        (<ProductGrid
+          title='Productos Destacados 2'
+          products={preparedrecentCelularesProducts} // Example products
+        />)
+      }
+      <Brands />
     </div>
   )
 }
-    

@@ -1,14 +1,14 @@
-import { useState, type SetStateAction } from "react"
+import { useState } from "react"
 import { FaEllipsis } from "react-icons/fa6"
 import { HiOutlineExternalLink } from "react-icons/hi"
 import { Link } from "react-router-dom"
 import { Loader } from "../../shared/Loader"
-import { useProducts } from "../../../hooks"
+import { useDeleteProduct, useProducts } from "../../../hooks"
 import { formatDate, formatPrice } from "../../../helpers"
 import { Pagination } from "../../shared/Pagination"
 import { CellTableProduct } from "./CellTableProduct"
 
- 
+
 const tableHeader = [
   '',
   'Nombre',
@@ -22,17 +22,19 @@ const tableHeader = [
 export const TableProduct = () => {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
-  const [selectVariant, setSelectVariant] = useState<{[key: string]: number}>({})
+  const [selectVariant, setSelectVariant] = useState<{ [key: string]: number }>({})
 
-  const  [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
-  const { products, isLoading, totalProducts} = useProducts({page});
+  const { products, isLoading, totalProducts } = useProducts({ page });
 
-  const handleMenuToggle = (index : number) => {
-    if(openMenuIndex === index){
+  const { mutate: deleteProduct, isPending: isDeleting } = useDeleteProduct();
+
+  const handleMenuToggle = (index: number) => {
+    if (openMenuIndex === index) {
       setOpenMenuIndex(null)
     }
-    else{
+    else {
       setOpenMenuIndex(index)
     }
   }
@@ -47,10 +49,12 @@ export const TableProduct = () => {
     });
   }
 
-  const handleDeleteProduct = (id:string) => {
-    console.log(id);
-  }
-  if(!products || isLoading || !totalProducts) return <Loader/>
+  const handleDeleteProduct = (id: string) => {
+    deleteProduct(id);
+    setOpenMenuIndex(null);
+  };
+
+  if (!products || isLoading || !totalProducts || isDeleting) return <Loader />
 
   return (
     <div className="flex flex-col flex-1 border border-gray-200 rounded-lg p-5 bg-white">
@@ -62,8 +66,8 @@ export const TableProduct = () => {
         <table className="text-sm w-full caption-bottom overflow-auto">
           <thead className="border-b border-gray-200 pb-3">
             <tr className="text-sm font-bold">
-              {tableHeader.map((header,index) => (
-                <th 
+              {tableHeader.map((header, index) => (
+                <th
                   key={index}
                   className="h-12 px-4 text-left">
                   {header}
@@ -72,74 +76,74 @@ export const TableProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map ((product, index)=>{
+            {products.map((product, index) => {
               const selectedVariantIndex =
                 selectVariant[product.id] ?? 0;
-              const selectedVariant = product.variants[selectedVariantIndex];
-                
+              const selectedVariant = product.variants[selectedVariantIndex] || {};
 
-              return( 
-            <tr key={index}>
-              <td className="p-4 align-middle sm:table-cell">
-                <img 
-                  src={product.images[0] || 'http://ui.shadcn.com/placeholder.svg'}
-                  alt="Imagen Product" 
-                  loading="lazy"
-                  decoding="async"
-                  className="w-16 h-16 aspect-aquare rounded-md object-contain" />
-              </td>
-              <CellTableProduct content={product.name}/>              
-              <td className="p-4 font-medium tracking-tighter">
-                <select 
-                  className="border border-gray-300 rounded-md p-1 w-full" 
-                  onChange={e => handleVariantChange(product.id,Number(e.target.value))}
-                  value={selectedVariantIndex}>
-                  {
-                    product.variants.map((variant,variantIndex) => (
-                      <option 
-                        key={variant.id}
-                        value={variantIndex}>
-                          {variant.color_name} - {variant.storage}
-                        </option>
-                    ))
-                  }
-                </select>
-              </td>
-              <CellTableProduct content={formatPrice(selectedVariant.price)}/> 
-              <CellTableProduct content={formatPrice(selectedVariant.stock)}/> 
-              <CellTableProduct content={formatDate(product.created_at)}/>              
-              <td className="relative">
-                <button className="text-slate-900" onClick={() => handleMenuToggle(index)}>
-                  <FaEllipsis/>
-                </button>
-                {openMenuIndex === index && (
-                  <div 
-                    className="absolute right-0 mt-2 bg-white border border-gray-200 rounded-md shadow-xl z-10 w-[120px]"
-                    role="menu"
-                  >
-                    <Link 
-                    to={`/dashboard/products/edit/${product.slug}`}
-                    className="flex items-center gap-1 w-full text-left px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100">
-                      Editar
-                      <HiOutlineExternalLink size={13} className="inline-block"/>
-                    </Link>
-                    <button 
-                      className="block w-full text-left px-4 text-xs font-medium text-gray-700 hover:bg-gray-100"
-                      onClick={() => handleDeleteProduct(product.id)}>
-                      Eliminar
+
+              return (
+                <tr key={index}>
+                  <td className="p-4 align-middle sm:table-cell">
+                    <img
+                      src={product.images[0] || 'http://ui.shadcn.com/placeholder.svg'}
+                      alt="Imagen Product"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-16 h-16 aspect-aquare rounded-md object-contain" />
+                  </td>
+                  <CellTableProduct content={product.name} />
+                  <td className="p-4 font-medium tracking-tighter">
+                    <select
+                      className="border border-gray-300 rounded-md p-1 w-full"
+                      onChange={e => handleVariantChange(product.id, Number(e.target.value))}
+                      value={selectedVariantIndex}>
+                      {
+                        product.variants.map((variant, variantIndex) => (
+                          <option
+                            key={variant.id}
+                            value={variantIndex}>
+                            {variant.color_name} - {variant.storage}
+                          </option>
+                        ))
+                      }
+                    </select>
+                  </td>
+                  <CellTableProduct content={formatPrice(selectedVariant?.price)} />
+                  <CellTableProduct content={(selectedVariant.stock || 0).toString()} />
+                  <CellTableProduct content={formatDate(product.created_at)} />
+                  <td className="relative">
+                    <button className="text-slate-900" onClick={() => handleMenuToggle(index)}>
+                      <FaEllipsis />
                     </button>
-                  </div>
-                )}
-              </td>
-            </tr>)
+                    {openMenuIndex === index && (
+                      <div
+                        className="absolute right-0 mt-2 bg-white border border-gray-200 rounded-md shadow-xl z-10 w-[120px]"
+                        role="menu"
+                      >
+                        <Link
+                          to={`/ dashboard / products / edit / ${product.slug} `}
+                          className="flex items-center gap-1 w-full text-left px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100">
+                          Editar
+                          <HiOutlineExternalLink size={13} className="inline-block" />
+                        </Link>
+                        <button
+                          className="block w-full text-left px-4 text-xs font-medium text-gray-700 hover:bg-gray-100"
+                          onClick={() => handleDeleteProduct(product.id)}>
+                          Eliminar
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>)
             })}
-           
+
           </tbody>
 
         </table>
       </div>
-      <Pagination 
-        totalItems={totalProducts}  
+      <Pagination
+        totalItems={totalProducts}
         page={page}
         setPage={setPage}
       />
