@@ -8,3 +8,6 @@ export * from './product/Inputform'
 export * from './product/FeatureInput'
 export * from './product/VariantsInput'
 export * from './product/UploaderImages'
+
+// Orders
+export * from './product/orders/TableOrdersAdmin'

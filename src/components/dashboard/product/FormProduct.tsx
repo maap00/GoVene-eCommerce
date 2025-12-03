@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { productSchema, type ProductFormValues } from "../../../lib/validators"
 import { IoIosArrowBack } from "react-icons/io"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { SectionFormProduct } from "./SectionFormProduct"
 import { Inputform } from "./Inputform"
 import { FeatureInput } from "./FeatureInput"
@@ -11,7 +11,7 @@ import { generateSlug } from '../../../helpers/index'
 import { VariantsInput } from "./VariantsInput"
 import { UploaderImages } from "./UploaderImages"
 import { Editor } from "./Editor"
-import { useCreateProduct } from "../../../hooks"
+import { useCreateProduct, useProduct, useUpdateProduct } from "../../../hooks"
 import { Loader } from "../../shared/Loader"
 
 
@@ -31,9 +31,34 @@ export const FormProduct = ({ titleForm }: Props) => {
         resolver: zodResolver(productSchema)
     })
 
+    const { slug } = useParams<{ slug: string }>();
+
+    const { product, isLoading } = useProduct(slug || '');
+
     const { mutate: createProduct, isPending } = useCreateProduct()
 
+    const { mutate: updateProduct, isPending: isUpdatePending } = useUpdateProduct(product?.id || '')
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (product && !isLoading) {
+            setValue('name', product.name)
+            setValue('slug', product.slug)
+            setValue('brand', product.brand)
+            setValue('features', product.features.map((f: string) => ({ value: f })))
+            setValue('description', product.description)
+            setValue('images', product.images)
+            setValue('variants', product.variants.map(v => ({
+                id: v.id,
+                stock: v.stock,
+                price: v.price,
+                storage: v.storage,
+                color: v.color,
+                colorName: v.color_name,
+            })))
+        };
+    }, [product, isLoading, setValue]);
 
     const watchName = watch('name');
 
@@ -43,26 +68,36 @@ export const FormProduct = ({ titleForm }: Props) => {
         const slug = generateSlug(watchName)
         setValue('slug', slug, { shouldValidate: true })
 
-
-
     }, [watchName, setValue])
 
 
     const onSubmit = handleSubmit(data => {
         const features = data.features.map(feature => feature.value);
 
-        createProduct({
-            name: data.name,
-            slug: data.slug,
-            brand: data.brand,
-            description: data.description,
-            variants: data.variants,
-            images: data.images,
-            features,
-        })
+        if (slug) {
+            updateProduct({
+                name: data.name,
+                slug: data.slug,
+                brand: data.brand,
+                description: data.description,
+                variants: data.variants,
+                images: data.images,
+                features,
+            })
+        } else {
+            createProduct({
+                name: data.name,
+                slug: data.slug,
+                brand: data.brand,
+                description: data.description,
+                variants: data.variants,
+                images: data.images,
+                features,
+            });
+        }
     });
 
-    if (isPending) return <Loader />
+    if (isPending || isUpdatePending || isLoading) return <Loader />
     return (
         <div className="flex flex-col gap-6 relative">
             <div className="flex justify-between items-center">
@@ -135,8 +170,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                     className="">
                     <UploaderImages
                         setValue={setValue}
-                        errors={errors}
-                    />
+                        errors={errors} watch={watch} />
                 </SectionFormProduct>
 
                 <SectionFormProduct
@@ -145,6 +179,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                     <Editor
                         setValue={setValue}
                         errors={errors}
+                        initialContent={product?.description}
                     />
                 </SectionFormProduct>
 

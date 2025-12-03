@@ -1,13 +1,13 @@
 import type { FieldErrors, UseFormSetValue } from "react-hook-form";
 import type { ProductFormValues } from "../../../lib/validators";
-import { EditorContent, useEditor, type JSONContent, type Editor as EditorType  } from "@tiptap/react";
+import { EditorContent, useEditor, type JSONContent, type Editor as EditorType } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 interface Props {
-    setValue: UseFormSetValue<ProductFormValues>;
-    errors: FieldErrors<ProductFormValues>;
-    initialContent?: JSONContent;
+	setValue: UseFormSetValue<ProductFormValues>;
+	errors: FieldErrors<ProductFormValues>;
+	initialContent?: JSONContent;
 }
 
 export const MenuBar = ({
@@ -16,10 +16,9 @@ export const MenuBar = ({
 	editor: EditorType | null;
 }) => {
 	const buttonClass = (isActive: boolean) =>
-		`w-8 h-7 grid place-items-center  border text-sm rounded transition-all ${
-			isActive
-				? 'border-blue-500 bg-blue-100 text-blue-700'
-				: 'border-gray-300 bg-white text-gray-600 hover:bg-gray-100'
+		`w-8 h-7 grid place-items-center  border text-sm rounded transition-all ${isActive
+			? 'border-blue-500 bg-blue-100 text-blue-700'
+			: 'border-gray-300 bg-white text-gray-600 hover:bg-gray-100'
 		}`;
 
 	if (!editor) {
@@ -92,39 +91,45 @@ export const MenuBar = ({
 };
 
 
-export const Editor = ({setValue, errors, initialContent }: Props) => {
+export const Editor = ({ setValue, errors, initialContent }: Props) => {
 
-    const editor = useEditor({
-        extensions: [StarterKit],
-        content: initialContent || '',
-        onUpdate: ({editor}) => {
-            //Update of product description field in the form
-            const content = editor.getJSON();
-            setValue('description', content, {shouldValidate: true});
-        },
-        editorProps: {
-            attributes: {
-                class:
-                'focus:outline-none min-h-[150px] prose prose-sm sm:prose-base',
-            }
-        }
-    })
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: initialContent || '',
+		onUpdate: ({ editor }) => {
+			//Update of product description field in the form
+			const content = editor.getJSON();
+			setValue('description', content, { shouldValidate: true });
+		},
+		editorProps: {
+			attributes: {
+				class:
+					'focus:outline-none min-h-[150px] prose prose-sm sm:prose-base',
+			}
+		}
+	});
 
-    return (
-        <div className="space-y-3">
-            <MenuBar editor={editor}/>
-            <EditorContent editor={editor}/>
+	useEffect(() => {
+		if (editor && initialContent) {
+			editor.commands.setContent(initialContent);
+		}
+	}, [editor, initialContent]);
 
-            {
-                errors.description && (
-                    <p className="text-red-500 text-xs mt-1">
-                        {(errors.description.message as ReactNode) || 'Debe escribir una descripción'}
-                    </p>
-                )
-            }
+	return (
+		<div className="space-y-3">
+			<MenuBar editor={editor} />
+			<EditorContent editor={editor} />
 
-        </div>
-    )
+			{
+				errors.description && (
+					<p className="text-red-500 text-xs mt-1">
+						{(errors.description.message as ReactNode) || 'Debe escribir una descripción'}
+					</p>
+				)
+			}
+
+		</div>
+	)
 
 };
 

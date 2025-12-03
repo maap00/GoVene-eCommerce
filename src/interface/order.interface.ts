@@ -19,5 +19,17 @@ export interface OrderItemSingle {
     created_at: string;
     id: number;
     status: string;
-    total_amount: number; 
+    total_amount: number;
 }
+
+export interface OrderWithCustomer {
+    id: number;
+    status: string;
+    total_amount: number;
+    created_at: string;
+    customers: {
+        full_name: string;
+        email: string;
+    } | null;
+}
+
