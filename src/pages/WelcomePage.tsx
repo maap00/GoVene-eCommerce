@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { WelcomeScene } from '../components/welcome/WelcomeScene';
 
 export const WelcomePage = () => {
     const [city, setCity] = useState('Puerto Ordaz');
@@ -12,11 +13,8 @@ export const WelcomePage = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden font-sans text-white">
             {/* Dynamic Background Elements */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600 rounded-full blur-[120px] opacity-40 animate-pulse"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full blur-[120px] opacity-40 animate-pulse delay-1000"></div>
-                <div className="absolute top-[20%] right-[20%] w-[20%] h-[20%] bg-cyan-500 rounded-full blur-[100px] opacity-20 animate-bounce duration-[10s]"></div>
-            </div>
+            {/* 3D Background Scene */}
+            <WelcomeScene />
 
             {/* Glassmorphism Card */}
             <div className="relative z-10 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 w-full max-w-md shadow-2xl transform transition-all hover:scale-105 duration-300">

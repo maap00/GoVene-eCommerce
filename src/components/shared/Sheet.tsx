@@ -31,23 +31,25 @@ export const Sheet = () => {
     }, [closeSheet]);
 
     const renderContent = () => {
-        switch(sheetContent) {
+        switch (sheetContent) {
             case 'cart':
-                return <Cart/>
+                return <Cart />
             case 'search':
-                return <Search/>;
+                return <Search />;
             default:
                 return null;
         }
     }
 
-  return (
-    <div className="fixed insert-0 bg-black bg-opacity-50 z-50 flex justify-end animate-fade-in">
-        <div 
-            ref={sheetRef}
-            className="bg-white text-black h-screen w-[500px] shadow-lg animate-slide-in">
+    return (
+        <div className="fixed inset-0 bg-black/50 z-50 flex justify-end animate-fade-in">
+            <div
+                ref={sheetRef}
+                className="bg-white text-black h-screen w-[500px] shadow-lg animate-slide-in">
                 {renderContent()}
+            </div>
         </div>
-    </div>
-  );
+
+
+    );
 };

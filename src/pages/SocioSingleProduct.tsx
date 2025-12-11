@@ -94,9 +94,9 @@ export const SocioSingleProduct = () => {
 
     // obtener el stock
 
-    const outOffStock = selectedVariant?.stock === 0;
+    const isOutOffStock = selectedVariant?.stock === 0;
 
-    const addToCard = () => {
+    const addToCar = () => {
         if (selectedVariant) {
             addItem({
                 variantId: selectedVariant.id,
@@ -127,7 +127,7 @@ export const SocioSingleProduct = () => {
                 price: selectedVariant.price,
                 quantity: count,
             });
-            navigate('/')
+            navigate('/checkout')
         }
     }
 
@@ -154,33 +154,35 @@ export const SocioSingleProduct = () => {
 
     return (
         <>
-            <div className="h-fix flex flex-col md:flex-row gap-16 mt-8">
-                <div>
-                    <GridImages images={product.images} />
-                </div>
+            <div className="h-fit flex flex-col md:flex-row gap-16 mt-8">
+
+                <GridImages images={product.images} />
+
                 <div className="flex-1 space-y-5">
                     <h1 className="text-3xl font-bold tracking-tight">
                         {product.name}
                     </h1>
-                    <div className="flex gap-5 items-center">
-                        <span className="tracking-wide text-lg font-semibold">
-                            {formatPrice(selectedVariant?.price || product.variants[0].price)}
+                    <div className='flex gap-5 items-center'>
+                        <span className='tracking-wide text-lg font-semibold'>
+                            {formatPrice(
+                                selectedVariant?.price || product.variants[0].price
+                            )}
                         </span>
-                        <div className="relative">
-                            {outOffStock && <Tag contentTag="agotado" />}
+
+                        <div className='relative'>
+                            {isOutOffStock && <Tag contentTag='agotado' />}
                         </div>
                     </div>
                     <Separator />
-                    <ul className="sparce-y-2 ml-7 my-10">
+                    <ul className='space-y-2 ml-7 my-10'>
                         {product.features.map(feature => (
-                            <li key={feature}
-                                className="text-sm flex items-center gap-2 tracking-tight font-medium">
-                                <span className="">
-                                    {feature}
-                                </span>
+                            <li
+                                key={feature}
+                                className='text-sm flex items-center gap-2 tracking-tight font-medium'>
+                                <span className='bg-black w-[5px] h-[5px] rounded-full' />
+                                {feature}
                             </li>
                         ))}
-
                     </ul>
 
                     <div className="flex flex-col gap-3">
@@ -190,8 +192,8 @@ export const SocioSingleProduct = () => {
                         <div className="flex gap-3">
                             {availableColors.map(color => (
                                 <button key={color} className={`w-8 h-8 rounded-full flex justify-center items-center ${selectedColor === color
-                                        ? 'border border-slate-800'
-                                        : ''}`}
+                                    ? 'border border-slate-800'
+                                    : ''}`}
                                     onClick={() => setSelectedColor(color)}
                                 >
 
@@ -227,56 +229,67 @@ export const SocioSingleProduct = () => {
 
                     </div>
 
-                    {outOffStock ? (
+                    {/* COMPRAR */}
+                    {isOutOffStock ? (
                         <button
-                            className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[$e2e2e2] w-full"
-                            disabled>
+                            className='bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[#e2e2e2] w-full'
+                            disabled
+                        >
                             Agotado
                         </button>
-                    ) :
-                        (
-                            <>
-                                <div className="space-y-3">
-                                    <p className="text-sm font-medium">
-                                        Cantidad:
-                                    </p>
-                                    <div className="flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full">
-                                        <button onClick={decrement} disabled={count === 1}>
-                                            <LuMinus size={15} />
-                                        </button>
-                                        <span className="text-slate-500 text-sm">{count}</span>
-                                        <button onClick={increment}>
-                                            <LuPlus size={15} />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col-3">
-                                    <button
-                                        className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[$e2e2e2]"
-                                        onClick={addToCard}></button>
-                                    Agregar al carrito
-                                    <button
-                                        className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full"
-                                        onClick={buyNow}>
-                                        Comprar ahora
+                    ) : (
+                        <>
+                            {/* Contador */}
+                            <div className='space-y-3'>
+                                <p className='text-sm font-medium'>Cantidad:</p>
+
+                                <div className='flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full'>
+                                    <button onClick={decrement} disabled={count === 1}>
+                                        <LuMinus size={15} />
+                                    </button>
+                                    <span className='text-slate-500 text-sm'>
+                                        {count}
+                                    </span>
+                                    <button onClick={increment}>
+                                        <LuPlus size={15} />
                                     </button>
                                 </div>
-                            </>
-                        )}
-                    <div className="flex pt-2">
-                        <div className="flex flex-col gap-1 flex-1 items-center">
+                            </div>
+
+                            {/* BOTONES ACCIÓN */}
+                            <div className='flex flex-col gap-3'>
+                                <button
+                                    className='bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[#e2e2e2]'
+                                    onClick={addToCar}
+                                >
+                                    Agregar al carro
+                                </button>
+                                <button
+                                    className='bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full'
+                                    onClick={buyNow}
+                                >
+                                    Comprar ahora
+                                </button>
+                            </div>
+                        </>
+                    )}
+
+                    <div className='flex pt-2'>
+                        <div className='flex flex-col gap-1 flex-1 items-center'>
                             <CiDeliveryTruck size={35} />
-                            <p className="text-xs font-semibold">
-                                Envio Gratis
-                            </p>
+                            <p className='text-xs font-semibold'>Envío gratis</p>
                         </div>
-                        <Link to='#' className="flex flex-bold gap-1 flex-1 items-center justify-center">
+
+                        <Link
+                            to='#'
+                            className='flex flex-col gap-1 flex-1 items-center justify-center'
+                        >
                             <BsChatLeftText size={30} />
-                            <p className="flex flex-col items-center text-xs">
-                                <span className="font-semibold">
-                                    Soporte 24/7
+                            <p className='flex flex-col items-center text-xs'>
+                                <span className='font-semibold'>
+                                    ¿Necesitas ayuda?
                                 </span>
-                                Contactanos
+                                Contáctanos aquí
                             </p>
                         </Link>
                     </div>

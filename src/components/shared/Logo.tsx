@@ -4,21 +4,21 @@ interface Props {
   isDashboard?: boolean;
 }
 
-export const  Logo = ({ isDashboard }: Props) => {
+export const Logo = ({ isDashboard }: Props) => {
   return (
-    <Link 
-      to="/" 
+    <Link
+      to="/home"
       className={`text-2xl font-bold tracking-tighter transition-all
     ${isDashboard && 'hover:scale-105'}`}
     >
-        <p className="hidden lg:block">
-            Go
-            <span className="text-cyan-600">Vene</span>
-        </p>
-        <p className="flex text-4xl lg:hidden">
-            <span className="-skew-x-6">G</span>
-            <span className="text-cyan-600 skew-x-6">V</span>
-        </p>
+      <p className="hidden lg:block">
+        Go
+        <span className="text-cyan-600">Vene</span>
+      </p>
+      <p className="flex text-4xl lg:hidden">
+        <span className="-skew-x-6">G</span>
+        <span className="text-cyan-600 skew-x-6">V</span>
+      </p>
     </Link>
   )
 }

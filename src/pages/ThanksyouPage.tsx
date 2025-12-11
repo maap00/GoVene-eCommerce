@@ -8,13 +8,13 @@ import { formatPrice } from '../helpers';
 
 export const ThanksyouPage = () => {
 
-    const {id} = useParams<{id: string}>();
+	const { id } = useParams<{ id: string }>();
 
-    const {data, isLoading, isError} = useOrder(Number(id));
-  	const { isLoading: isLoadingSession } = useUser();
-    const navigate = useNavigate();
+	const { data, isLoading, isError } = useOrder(Number(id));
+	const { isLoading: isLoadingSession } = useUser();
+	const navigate = useNavigate();
 
-	  useEffect(() => {
+	useEffect(() => {
 		supabase.auth.onAuthStateChange(async (event, session) => {
 			if (event === 'SIGNED_OUT' || !session) {
 				navigate('/login');
@@ -23,12 +23,12 @@ export const ThanksyouPage = () => {
 	}, [navigate]);
 
 
-  	if(isError) return <div>Loading data error</div>
+	if (isError) return <div>Loading data error</div>
 
 	if (isLoading || !data || isLoadingSession) return <Loader />;
 
 
-  return (
+	return (
 		<div className='flex flex-col h-screen'>
 			<header className='text-black flex items-center justify-center flex-col px-10 py-12'>
 				<Link
@@ -162,7 +162,7 @@ export const ThanksyouPage = () => {
 					</p>
 
 					<Link
-						to='/'
+						to='/home'
 						className='text-white bg-black py-4 text-sm rounded-md px-5 tracking-tight font-semibold'
 					>
 						Seguir comprando

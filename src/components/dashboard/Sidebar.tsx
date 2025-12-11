@@ -11,17 +11,17 @@ export const Sidebar = () => {
         await signOut();
     }
     return (
-        <div className=" bg-stone-800 text-white flex flex-col gap-10 items-center p-5 fixed h-screen lh:w-[250px]">
+        <div className="w-[120px] bg-stone-800 text-white flex flex-col gap-10 items-center p-5 fixed h-screen lg:w-[250px]">
             <Logo isDashboard />
             <nav className="w-full space-y-5 flex-1">
                 {dashboardLinks.map((link) => (
                     <NavLink
                         key={link.id}
                         to={link.href}
-                        className={({ isActive }) => `flex items-center justify-center gap-3 transition-all duration-300 rounded-md 
+                        className={({ isActive }) => `flex items-center justify-center gap-3 pl-0 py-3 transition-all duration-300 rounded-md 
                     ${isActive
                                 ? 'text-white bg-cyan-600'
-                                : 'hover: text-white hover:bg-cyan-600'
+                                : 'hover:text-white hover:bg-cyan-600'
                             } lg:pl-5 lg:justify-start`
                         }
                     >
