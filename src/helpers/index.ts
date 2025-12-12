@@ -94,3 +94,7 @@ export const extractFilePath = (url: string): string => {
     }
     return paths[1];
 };
+
+export function upperCase(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

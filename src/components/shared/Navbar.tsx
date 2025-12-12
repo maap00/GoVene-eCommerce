@@ -1,12 +1,13 @@
 import { navbarLinks } from '../../constants/links'
 import { NavLink, Link } from 'react-router-dom'
-import { HiOutlineSearch, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi'
+import { HiOutlineSearch, HiOutlineShoppingBag, HiOutlineUser, HiOutlineTrash } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { Logo } from './Logo'
 import { useGlobalStore } from '../../store/global.store'
 import { useCartStore } from '../../store/cart.store'
 import { useCustomer, useUser } from '../../hooks'
 import { Loading } from './Loading'
+import { upperCase } from '../../helpers'
 
 export const Narbar = () => {
   const openSheet = useGlobalStore((state) => state.openSheet);
@@ -17,8 +18,7 @@ export const Narbar = () => {
 
   const userId = session?.user.id;
 
-  const { data: customer } = useCustomer(userId!);
-
+  const { data: customer, error: customerError } = useCustomer(userId!);
 
   return (
     <header className='bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
@@ -38,21 +38,28 @@ export const Narbar = () => {
       </nav>
 
       <div className='flex  gap-5 items-center'>
+        <button className="relative" onClick={() => {
+          localStorage.clear();
+          window.location.reload();
+        }}>
+          <HiOutlineTrash size={25} />
+        </button>
+
         <button className="relative" onClick={() => openSheet('search')}>
           <HiOutlineSearch size={25} />
         </button>
 
-        {isLoading ? (
+        {isLoading && !customerError ? (
 
           <Loading />
 
-        ) : session ? (
+        ) : session && !customerError ? (
           <div className="relative">
             <Link
               to="/account"
               className="border-2 border-slade-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold"
             >
-              {customer && customer.full_name[0]}
+              {customer && upperCase(customer.full_name[0])}
             </Link>
           </div>
         ) : (
@@ -60,6 +67,7 @@ export const Narbar = () => {
             <HiOutlineUser size={25} />
           </Link>
         )
+
         }
 
         <button

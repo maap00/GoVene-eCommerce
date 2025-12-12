@@ -210,7 +210,26 @@ export const createProduct = async (productInput: ProductInput) => {
 
 }
 
-export const deleteProducto = async (productId: string) => {
+export const deleteProduct = async (productId: string) => {
+
+    // 0. Check if there are any orders associated with the product
+    const { data: hasOrders, error: checkError } = await supabase
+        .from('order_items')
+        .select(`
+            id,
+            variants!inner(product_id)
+        `)
+        .eq('variants.product_id', productId)
+        .limit(1);
+
+    if (checkError) {
+        console.log(checkError.message);
+        throw new Error(checkError.message);
+    }
+
+    if (hasOrders && hasOrders.length > 0) {
+        throw new Error('No se puede eliminar el producto porque tiene pedidos asociados.');
+    }
 
     //1. Delete the variant product by id
 
@@ -340,7 +359,7 @@ export const updateProduct = async (
     const uploadedImages = await Promise.all(
         validImages.map(async image => {
             if (image instanceof File) {
-                //si la imagen no es un URL (es un archivo), entonces subela al bucket
+                // Si la imagen no es una URL (es un archivo), entonces subela al bucket
                 const { data, error } = await supabase.storage
                     .from('product-images')
                     .upload(`${folderName}/${productId}-${image.name}`, image);

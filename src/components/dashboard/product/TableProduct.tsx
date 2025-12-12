@@ -26,7 +26,7 @@ export const TableProduct = () => {
 
   const [page, setPage] = useState(1);
 
-  const { products, isLoading, totalProducts } = useProducts({ page });
+  const { products, isLoading, totalProducts, count } = useProducts({ page });
 
   const { mutate: deleteProduct, isPending: isDeleting } = useDeleteProduct();
 
@@ -53,6 +53,8 @@ export const TableProduct = () => {
     deleteProduct(id);
     setOpenMenuIndex(null);
   };
+
+  //const productsDoesNotExist = !products || products.length === 0;
 
   if (!products || isLoading || !totalProducts || isDeleting) return <Loader />
 

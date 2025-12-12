@@ -32,7 +32,7 @@ export const ThanksyouPage = () => {
 		<div className='flex flex-col h-screen'>
 			<header className='text-black flex items-center justify-center flex-col px-10 py-12'>
 				<Link
-					to='/'
+					to='/home'
 					className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl'
 				>
 					<p>

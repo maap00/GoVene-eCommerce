@@ -3,7 +3,7 @@ import { getUseDate } from "../../actions"
 
 
 export const useCustomer = (userId: string) => {
-    const  { data, isLoading} = useQuery({
+    const { data, isLoading, error } = useQuery({
         queryKey: ['customer', userId],
         queryFn: () => getUseDate(userId),
         enabled: !!userId,
@@ -11,8 +11,9 @@ export const useCustomer = (userId: string) => {
         refetchOnWindowFocus: true,
     })
 
-    return{
+    return {
         data,
-        isLoading
+        isLoading,
+        error
     }
 }
