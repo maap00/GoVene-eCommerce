@@ -11,7 +11,7 @@ export const Sidebar = () => {
         await signOut();
     }
     return (
-        <div className="w-[120px] bg-stone-800 text-white flex flex-col gap-10 items-center p-5 fixed h-screen lg:w-[250px]">
+        <div className="fixed flex h-screen w-[68px] flex-col items-center gap-7 bg-stone-800 p-2 text-white sm:w-[120px] sm:gap-10 sm:p-5 lg:w-[250px]">
             <Logo isDashboard />
             <nav className="w-full space-y-5 flex-1">
                 {dashboardLinks.map((link) => (

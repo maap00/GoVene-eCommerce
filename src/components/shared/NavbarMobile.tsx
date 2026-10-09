@@ -38,18 +38,7 @@ export const NavbarMobile = () => {
                     </NavLink>
                 ))}
 
-                <button
-                    type="button"
-                    disabled
-                    aria-disabled="true"
-                    title="Eventos aún no disponibles"
-                    className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-medium text-slate-300"
-                >
-                    <span className="grid h-7 w-10 place-items-center rounded-full">
-                        <HiOutlineCalendar size={21} strokeWidth={1.7} />
-                    </span>
-                    <span className="truncate">Eventos</span>
-                </button>
+               
 
                 <button
                     type="button"

@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+@keyframes product-image-in {
+  from { opacity: 0.72; transform: scale(0.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes sales-card-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sales-line-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes sales-donut-enter {
+  from { opacity: 0; transform: scale(.94) rotate(-20deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes sales-bar-enter {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.sales-card-enter { animation: sales-card-enter .55s cubic-bezier(.2,.7,.2,1) both; }
+.sales-line-draw { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: sales-line-draw 1.25s ease-out .12s forwards; }
+.sales-donut-draw { animation: sales-donut-enter .7s cubic-bezier(.2,.7,.2,1) both; }
+.sales-bar-draw { transform-origin: left center; animation: sales-bar-enter .8s cubic-bezier(.2,.7,.2,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sales-card-enter, .sales-line-draw, .sales-donut-draw, .sales-bar-draw {
+    animation-duration: .01ms;
+    animation-delay: 0ms;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
