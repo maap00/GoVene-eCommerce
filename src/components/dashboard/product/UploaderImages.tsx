@@ -28,9 +28,10 @@ export const UploaderImages = ({
     // Cargar imágenes existentes si las hay en el formulario
     useEffect(() => {
         if (formImages && formImages.length > 0 && images.length == 0) {
-            const existingImages = formImages.map(url => ({
-                previewUrl: url,
-            }));
+            const existingImages = formImages.map(image => typeof image === 'string'
+                ? { previewUrl: image }
+                : { file: image, previewUrl: URL.createObjectURL(image) }
+            );
             setImages(existingImages);
 
             // Actualizar el valor del formulario

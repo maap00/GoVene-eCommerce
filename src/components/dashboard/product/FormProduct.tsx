@@ -14,6 +14,7 @@ import { UploaderImages } from "./UploaderImages"
 import { Editor } from "./Editor"
 import { useCreateProduct, useProduct, useUpdateProduct } from "../../../hooks"
 import { Loader } from "../../shared/Loader"
+import type { VariantsInput as VariantInputData } from "../../../interface"
 
 
 
@@ -74,6 +75,14 @@ export const FormProduct = ({ titleForm }: Props) => {
 
     const onSubmit = handleSubmit(data => {
         const features = data.features.map(feature => feature.value);
+        const variants: VariantInputData[] = data.variants.map(variant => ({
+            id: variant.id,
+            stock: variant.stock,
+            price: variant.price,
+            storage: variant.storage,
+            color: variant.color ?? '',
+            colorName: variant.colorName ?? '',
+        }));
 
         if (slug) {
             updateProduct({
@@ -81,7 +90,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                 slug: data.slug,
                 brand: data.brand,
                 description: data.description,
-                variants: data.variants,
+                variants,
                 images: data.images,
                 features,
             })
@@ -91,7 +100,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                 slug: data.slug,
                 brand: data.brand,
                 description: data.description,
-                variants: data.variants,
+                variants,
                 images: data.images,
                 features,
             });

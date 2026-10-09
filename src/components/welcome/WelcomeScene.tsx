@@ -79,8 +79,8 @@ const Toucan = ({ position, speed = 1, radius = 5 }: { position: [number, number
             {/* Beak - Large and Colorful */}
             <group position={[0, 0.2, 0.15]} rotation={[0.2, 0, 0]}>
                 {/* Upper Beak */}
-                <mesh position={[0, 0, 0.25]}>
-                    <coneGeometry args={[0.08, 0.6, 8]} rotation={[Math.PI / 2, 0, 0]} />
+                <mesh position={[0, 0, 0.25]} rotation={[Math.PI / 2, 0, 0]}>
+                    <coneGeometry args={[0.08, 0.6, 8]} />
                     <meshStandardMaterial color="#ffaa00" />
                 </mesh>
                 {/* Beak Tip */}
@@ -133,7 +133,7 @@ const Firefly = ({ position, speed = 1, color = "#ffff00" }: { position: [number
 export const WelcomeScene = () => {
     // Generate random plants
     const plants = useMemo(() => {
-        return Array.from({ length: 15 }).map((_, i) => ({
+        return Array.from({ length: 15 }).map(() => ({
             position: [
                 (Math.random() - 0.5) * 25,
                 -3,
@@ -165,7 +165,7 @@ export const WelcomeScene = () => {
                 {/* Environment */}
                 <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
                 <Sparkles count={150} scale={15} size={3} speed={0.4} opacity={0.6} color="#aaffaa" />
-                <Cloud opacity={0.4} speed={0.1} width={25} depth={2} segments={10} position={[0, 6, -12]} color="#1a3322" />
+                <Cloud opacity={0.4} speed={0.1} bounds={[25, 2, 2]} segments={10} position={[0, 6, -12]} color="#1a3322" />
 
                 {/* Vegetation */}
                 {plants.map((plant, i) => (

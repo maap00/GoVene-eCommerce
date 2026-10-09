@@ -84,7 +84,12 @@ export const productSchema = z.object({
 			})
 		)
 		.min(1, 'Debe haber al menos una variante'),
-	images: z.array(z.any()).min(1, 'Debe haber al menos una imagen'),
+	images: z.array(
+		z.union([
+			z.custom<File>(value => typeof File !== 'undefined' && value instanceof File),
+			z.string(),
+		])
+	).min(1, 'Debe haber al menos una imagen'),
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;

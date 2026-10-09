@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { HiOutlineHome, HiOutlineTag, HiOutlineCube, HiOutlineCalendar, HiOutlineShoppingBag } from 'react-icons/hi'
+import { HiOutlineHome, HiOutlineTag, HiOutlineCube, HiOutlineShoppingBag } from 'react-icons/hi'
 import { useGlobalStore } from '../../store/global.store'
 
 const navigationItems = [

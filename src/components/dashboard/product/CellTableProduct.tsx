@@ -1,9 +1,10 @@
 interface Props {
 	content: string;
+	className?: string;
 }
 
-export const CellTableProduct = ({ content }: Props) => {
+export const CellTableProduct = ({ content, className = '' }: Props) => {
 	return (
-		<td className='p-4 font-medium tracking-tighter'>{content}</td>
+		<td className={`px-3 py-3 font-medium ${className}`}>{content}</td>
 	);
 };

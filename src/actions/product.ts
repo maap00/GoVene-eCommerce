@@ -153,6 +153,8 @@ export const createProduct = async (productInput: ProductInput) => {
 
         const uploadedImages = await Promise.all(
             productInput.images.map(async (image) => {
+                if (typeof image === 'string') return image;
+
                 const { data, error } = await supabase.storage
                     .from('product-images')
                     .upload(`${folderName}/${product.id}-${image.name}`, image);
@@ -334,11 +336,11 @@ export const updateProduct = async (
     // 3. Manejo de imágenes (SUBIR NUEVAS y ELIMINAR ANTIGUAS SI ES NECESARIO)
     const folderName = productId;
 
-    const validImages = productInput.images.filter(image => image);
+    const validImages = productInput.images;
 
     // 3.1 Identificar las imágenes que han sido eliminadas
     const imagesToDelete = existingImages.filter(
-        image => !validImages.includes(image)
+        image => !validImages.some(inputImage => typeof inputImage === 'string' && inputImage === image)
     );
 
     // 3.2 Obtener los paths de los archivos a eliminar
@@ -361,26 +363,18 @@ export const updateProduct = async (
 
     const uploadedImages = await Promise.all(
         validImages.map(async image => {
-            if (image instanceof File) {
-                // Si la imagen no es una URL (es un archivo), entonces subela al bucket
-                const { data, error } = await supabase.storage
-                    .from('product-images')
-                    .upload(`${folderName}/${productId}-${image.name}`, image);
+            if (typeof image === 'string') return image;
 
-                if (error) throw new Error(error.message);
+            // Los archivos nuevos se suben; las URLs existentes se conservan arriba.
+            const { data, error } = await supabase.storage
+                .from('product-images')
+                .upload(`${folderName}/${productId}-${image.name}`, image);
 
-                const imageUrl = supabase.storage
-                    .from('product-images')
-                    .getPublicUrl(data.path).data.publicUrl;
+            if (error) throw new Error(error.message);
 
-                return imageUrl;
-            }
-            else if (typeof image === 'string') {
-                return image;
-            }
-            else {
-                throw new Error('Tipo de imagen no compatible')
-            }
+            return supabase.storage
+                .from('product-images')
+                .getPublicUrl(data.path).data.publicUrl;
         })
     );
 
