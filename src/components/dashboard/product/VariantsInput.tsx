@@ -13,7 +13,7 @@ interface Props {
 	register: UseFormRegister<ProductFormValues>;
 }
 
-const headersVariants = ['Stock', 'Precio', 'Capacidad', 'Color', ''];
+const headersVariants = ['Existencias', 'Precio', 'Capacidad', 'Color', ''];
 
 export const VariantsInput = ({
 	control,
@@ -99,7 +99,7 @@ export const VariantsInput = ({
 						<div className='grid grid-cols-5 gap-4 items-center'>
 							<input
 								type='number'
-								placeholder='Stock'
+								placeholder='Existencias'
 								{...register(`variants.${index}.stock`, {
 									valueAsNumber: true,
 								})}
@@ -134,7 +134,7 @@ export const VariantsInput = ({
 
 										<input
 											type='text'
-											placeholder='Azul Marino'
+											placeholder='Azul marino'
 											{...register(`variants.${index}.colorName`)}
 											className='rounded-md px-3 py-1.5 w-full text-xs focus:outline-none font-semibold placeholder:font-normal'
 										/>
@@ -142,6 +142,7 @@ export const VariantsInput = ({
 								)}
 								<button
 									className='border w-full h-8 cursor-pointer rounded text-xs font-medium flex items-center justify-center'
+					aria-label={`Editar color de variante ${index + 1}`}
 									type='button'
 									onClick={() => toggleColorActive(index)}
 								>
@@ -161,6 +162,7 @@ export const VariantsInput = ({
 							<div className='flex justify-end'>
 								<button
 									type='button'
+					aria-label={`Quitar variante ${index + 1}`}
 									onClick={() => removeVariant(index)}
 									className='p-1'
 								>

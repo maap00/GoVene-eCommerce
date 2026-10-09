@@ -43,7 +43,7 @@ export const createOrder = async (order: OrderInput) => {
         }
 
         if (variantData.stock < item.quantity) {
-            throw new Error("Stock unenable");
+            throw new Error("No hay suficientes existencias para completar el pedido");
 
         }
     }
@@ -117,7 +117,7 @@ export const createOrder = async (order: OrderInput) => {
             .single();
 
         if (!variantData) {
-            throw new Error("Stock unenable");
+            throw new Error("No se pudo consultar la disponibilidad del producto");
 
         }
 
@@ -132,7 +132,7 @@ export const createOrder = async (order: OrderInput) => {
 
         if (updateErrorStock) {
             console.log(updateErrorStock);
-            throw new Error("Don't update stock");
+            throw new Error("No se pudieron actualizar las existencias");
 
         }
 

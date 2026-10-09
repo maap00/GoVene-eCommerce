@@ -10,7 +10,7 @@ export const FeatureGrid = () => {
             <div className="flex items-center gap-6">
                 <MdLocalShipping size={40} className='text-slate-600' />
                 <div className="space-y-1">
-                    <p className="font-semibold">Envio Gratis</p>
+                    <p className="font-semibold">Envío gratis</p>
                     <p className="text-sm">En todos nuestros productos</p>
                 </div>
             </div>
@@ -18,21 +18,21 @@ export const FeatureGrid = () => {
                 <HiMiniReceiptRefund size={40} className='text-slate-600' />
                 <div className="space-y-1">
                     <p className="font-semibold">Devoluciones</p>
-                    <p className="text-sm">Hasta 72horas para devolver sin costo</p>
+                    <p className="text-sm">Hasta 72 horas para devolver sin costo</p>
                 </div>
             </div>
             <div className="flex items-center gap-6">
                 <FaHammer size={40} className='text-slate-600' />
                 <div className="space-y-1">
-                    <p className="font-semibold">Soporte tecnico</p>
-                    <p className="text-sm">Servicio 24horas</p>
+                    <p className="font-semibold">Soporte técnico</p>
+                    <p className="text-sm">Servicio las 24 horas</p>
                 </div>
             </div>
             <div className="flex items-center gap-6">
                 <BiWorld size={40} className='text-slate-600' />
                 <div className="space-y-1">
-                    <p className="font-semibold">Garantias</p>
-                    <p className="text-sm">Garantia por 365 dias</p>
+                    <p className="font-semibold">Garantías</p>
+                    <p className="text-sm">Garantía por 365 días</p>
                 </div>
             </div>
         </div>

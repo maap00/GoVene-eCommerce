@@ -37,14 +37,14 @@ export const ClientLayout = () => {
                     to='/account/orders'
                     className={({ isActive }) => `
                 ${isActive ? 'underline' : 'hover:underline'}`} >
-                    Orders
+                    Pedidos
                 </NavLink>
 
                 {role?.role === 'admin' && (
                     <NavLink
                         to='/dashboard/products'
                         className='flex items-center gap-1 hover:underline' >
-                        Dashboard
+                        Administración
                         <HiOutlineExternalLink
                             size={16}
                             className='inline-block' />
@@ -54,7 +54,7 @@ export const ClientLayout = () => {
 
 
                 <button className="hover:underline" onClick={handleLogout}>
-                    Close session
+                    Cerrar sesión
                 </button>
             </nav>
 

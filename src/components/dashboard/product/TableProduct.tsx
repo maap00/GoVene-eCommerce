@@ -14,7 +14,7 @@ const tableHeader = [
   'Nombre',
   'Variante',
   'Precio',
-  'Stock',
+  'Existencias',
   'Fecha de creación',
   '',
 ]
@@ -26,7 +26,7 @@ export const TableProduct = () => {
 
   const [page, setPage] = useState(1);
 
-  const { products, isLoading, totalProducts } = useProducts({ page });
+  const { products, totalProducts } = useProducts({ page });
 
   const { mutate: deleteProduct, isPending: isDeleting } = useDeleteProduct();
 
@@ -62,7 +62,7 @@ export const TableProduct = () => {
     <div className="flex flex-col flex-1 border border-gray-200 rounded-lg p-5 bg-white">
       <h1 className="font-bold text-xl">Productos</h1>
       <p className="text-sm mt-1 mb-8 font-regular text-gray-500">
-        Gestiona tus productos y estadisticas de ventas
+        Gestiona tus productos y estadísticas de ventas
       </p>
       <div className="relative w-full h-full">
         <table className="text-sm w-full caption-bottom overflow-auto">
@@ -89,7 +89,7 @@ export const TableProduct = () => {
                   <td className="p-4 align-middle sm:table-cell">
                     <img
                       src={product.images[0] || 'http://ui.shadcn.com/placeholder.svg'}
-                      alt="Imagen Product"
+                      alt={`Imagen de ${product.name}`}
                       loading="lazy"
                       decoding="async"
                       className="w-16 h-16 aspect-aquare rounded-md object-contain" />

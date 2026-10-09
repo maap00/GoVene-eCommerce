@@ -26,11 +26,11 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
     return (
         <div className="flex items-center justify-between">
             <p className="text-xs font-medium">
-                Showing{' '}
+                Mostrando{' '}
                 <span className="font-bold">
                     {startItem} - {endItem}
                 </span>{' '}
-                de <span className="font-bold"> {totalItems} </span> products
+                de <span className="font-bold"> {totalItems} </span> productos
             </p>
             <div className="flex gap-3">
                 <button
@@ -38,7 +38,7 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
                     onClick={handlePrevPage}
                     disabled={page === 1}
                 >
-                    Previous
+                    Anterior
                 </button>
 
 
@@ -47,7 +47,7 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
                     onClick={handleNextPage}
                     disabled={isLastPage}
                 >
-                    Next
+                    Siguiente
                 </button>
             </div>
         </div>

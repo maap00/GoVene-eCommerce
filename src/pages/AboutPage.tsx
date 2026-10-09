@@ -11,14 +11,14 @@ export const AboutPage = () => {
         Nuestros servicios
       </h1>
       <div className="flex flex-col gap-4 tracking-tighter leading-7 text-sm font-medium text-slate-800">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque odio impedit tempore excepturi voluptas possimus voluptatum accusamus aperiam aut asperiores, a autem delectus quae eum suscipit provident repudiandae placeat omnis?</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam exercitationem itaque dicta veritatis ratione reiciendis, vero reprehenderit temporibus hic et ducimus quia sit eius, necessitatibus libero. Quasi repudiandae qui accusamus.</p>
+        <p>GoVene reúne productos de distintas categorías en un solo mercado digital para que encuentres lo que necesitas de forma sencilla.</p>
+        <p>Explora nuestro catálogo, compara opciones y descubre marcas y productos disponibles para el público venezolano.</p>
 
         <h2 className="text-3xl font-semibold tracking-tight mt-8mb-4">
           ¿Por qué elegirnos?
         </h2>
         <p className="">
-          Para mas información sobre nuestros servicios, no dudes en contactarnos a través de nuestro formulario de contacto o llamándonos directamente.
+          Para más información sobre nuestros servicios, no dudes en contactarnos.
         </p>
       </div>
     </div>

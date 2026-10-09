@@ -47,11 +47,11 @@ export const CardProduct = ({
                 price: selectedVariant?.price,
                 quantity: 1
             });
-            toast.success('Product added', {
+            toast.success('Producto agregado al pedido', {
                 position: 'bottom-right'
             });
         } else {
-            toast.error('Product out of stock', {
+            toast.error('Este producto está agotado', {
                 position: 'bottom-right'
             })
         }
@@ -66,14 +66,16 @@ export const CardProduct = ({
     return (
         <div className="flex flex-col gap-6 relative">
             <Link to={`/products/${slug}`}
-                className=" flex relative group overflow-hidden">
-                <div className="flex h-[350px] w-full items-center justify-center py-2 lg:h-[250px]">
+                className="group relative block aspect-square w-full overflow-hidden rounded-2xl bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-600 focus-visible:ring-offset-2">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl border border-[#E7E8EB] bg-white p-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 group-hover:border-slate-300 group-hover:shadow-[0_4px_14px_rgba(15,23,42,0.08)]">
                     <img
                         src={img}
                         alt={name}
-                        className="object-contain h-full w-full" />
+                        loading="lazy"
+                        decoding="async"
+                        className="block h-full w-full object-contain object-center" />
                 </div>
-                <button className="bg-white border border-slate-200 absolute w-full bottom-0 py-3 rounded-3xl flex items-center justify-center gap-1 text-sm font-medium hover:bg-stone-100 translate-y-[100%] transition-all duration-300 group-hover:translate-y-0"
+                <button className="absolute inset-x-3 bottom-3 flex translate-y-[100%] items-center justify-center gap-1 rounded-full border border-slate-200 bg-white/95 py-3 text-sm font-medium shadow-sm transition-transform duration-300 group-hover:translate-y-0 hover:bg-stone-100"
                     onClick={handleAddClick}>
                     <FiPlus />
                     Agregar

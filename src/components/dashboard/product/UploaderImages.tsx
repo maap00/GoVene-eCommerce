@@ -84,11 +84,12 @@ export const UploaderImages = ({
                         <div className='border border-gray-200 w-full h-20 rounded-md p-1 relative lg:h-28'>
                             <img
                                 src={image.previewUrl}
-                                alt={`Preview ${index}`}
+                                alt={`Vista previa de imagen ${index + 1}`}
                                 className='rounded-md w-full h-full object-contain'
                             />
                             <button
                                 type='button'
+                                aria-label={`Quitar imagen ${index + 1}`}
                                 onClick={() => handleRemoveImage(index)}
                                 className='flex justify-end absolute -top-3 -right-4 hover:scale-110 transition-all z-10'
                             >

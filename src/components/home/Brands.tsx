@@ -33,7 +33,7 @@ export const Brands = () => {
                 Marcas asociadas
             </h2>
             <p className="w-2/3 text-center text-sm md:text-base">
-                Tenemos lo mas moderno en tecnologia y los mejores precios del mercado
+                Tenemos lo más moderno en tecnología y los mejores precios del mercado.
             </p>
             <div className='grid grid-cols-3 gap-6 mt-8 items-center md:grid-cols-6'>
                 {brands.map((brand, index) => (

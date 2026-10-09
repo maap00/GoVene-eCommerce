@@ -20,9 +20,9 @@ return (
   <div className="px-5 py-7 flex justify-between items-center border-b border-slate-200">
     <span className="flex gap-3 items-center font-semibold">
       <HiOutlineShoppingBag size={20} />
-      {totalItemsInCart} Items
+      {totalItemsInCart} {totalItemsInCart === 1 ? 'artículo' : 'artículos'}
     </span>
-    <button type="button" onClick={closeSheet}>
+    <button type="button" aria-label="Cerrar pedido" onClick={closeSheet}>
       <IoMdClose size={25} className='text-black' />
     </button>
   </div>
@@ -42,10 +42,10 @@ return (
       <Link to="/checkout"
         className="w-full bg-black text-white py-3.5 rounded-full flex items-center justify-center gap-3">
       <RiSecurePaymentLine size={24} />
-      Continue to checkout
+      Continuar al pago
       </Link>
       <button className="mt-3 w-full text-black border border-black rounded-full py-3" onClick={cleanCart}>
-        Clear cart
+        Vaciar pedido
       </button>
     </div>
   </>
@@ -53,10 +53,10 @@ return (
   ) : (
     <div className="flex flex-col items-center justify-center h-full gap-7">
       <p className="text-sm font-medium tracking-tight">
-        Your cart is empty
+        Tu pedido está vacío
       </p>
       <Link to={'/socios'} className="py-4 bg-black rounded-full text-white px-7 text-xs uppercase tracking-widest font-semibold">
-        Shop products
+        Explorar productos
       </Link>
 
     </div>

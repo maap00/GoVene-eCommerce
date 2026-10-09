@@ -53,16 +53,16 @@ export const CartItem = ({ item }: Props) => {
                 </div>
                 <div className="flex gap-4">
                     <div className="flex items-center gap-5 px-2 py-1 b order border-slate-200 w-fit rounded-full">
-                        <button onClick={decrement} disabled={item.quantity === 1}>
+                        <button aria-label={`Reducir cantidad de ${item.name}`} onClick={decrement} disabled={item.quantity === 1}>
                             <LuMinus size={15} />
                         </button>
                         <span className="text-slate-500 text-sm">{item.quantity}</span>
-                        <button onClick={increment}>
+                        <button aria-label={`Aumentar cantidad de ${item.name}`} onClick={increment}>
                             <LuPlus size={15} />
                         </button>
                     </div>
                     <button className="underline font-medium text-[10px]" onClick={() => removeItem(item.variantId)}>
-                        Remove
+                        Quitar
                     </button>
                 </div>
             </div>

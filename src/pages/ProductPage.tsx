@@ -2,6 +2,6 @@
 
 export const ProductPage = () => {
   return (
-    <div>ProductPage</div>
+    <div>Página de producto</div>
   )
 }

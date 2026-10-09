@@ -29,10 +29,10 @@ export const LoginPage = () => {
   return (
     <div className="h-full flex flex-col items-center mt-12 gap-5">
       <h1 className="text-4xl font-bold capitalize">
-        Start Sesion
+        Inicia sesión
       </h1>
       <p className="text-sm font-medium">
-        Welcome back!
+        ¡Te damos la bienvenida!
       </p>
 
       {isPending ?
@@ -43,18 +43,18 @@ export const LoginPage = () => {
             <form action="" className="flex flex-col items-center gap-4 w-full mt-10 sm:w-[400px] lg:w-[500px]" onSubmit={onLogin}>
               <input type="email"
                 className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
-                placeholder='Insert email' value={email} onChange={e => setEmail(e.target.value)} />
+                placeholder='Correo electrónico' value={email} onChange={e => setEmail(e.target.value)} />
               <input type="password"
                 className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
-                placeholder='Insert password' value={password} onChange={e => setPassword(e.target.value)} />
+                placeholder='Contraseña' value={password} onChange={e => setPassword(e.target.value)} />
               <button
                 className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full mt-5 w-full">
-                Log In
+                Iniciar sesión
               </button>
             </form>
             <p className="text-sm text-stone-800">
               <Link to='/register' className="underline ml-2">
-                Sign Up
+                Crear cuenta
               </Link>
             </p>
           </>

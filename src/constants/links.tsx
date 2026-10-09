@@ -3,19 +3,19 @@ import { FaBoxOpen, FaCartShopping, FaFacebook, FaInstagram, FaTiktok, FaXTwitte
 
 export const navbarLinks = [{
     id: 1,
-    title: 'Home',
+    title: 'Inicio',
     href: '/home'
 }, {
     id: 2,
-    title: 'Products',
+    title: 'Productos',
     href: '/products'
 }, {
     id: 3,
-    title: 'Socios',
+    title: 'Catálogo',
     href: '/socios'
 }, {
     id: 4,
-    title: 'About',
+    title: 'Nosotros',
     href: '/about'
 }]
 
@@ -26,12 +26,12 @@ export const socialMedia = [{
     icon: <FaXTwitter />
 }, {
     id: 3,
-    title: 'Products',
+    title: 'Instagram',
     href: '/',
     icon: <FaInstagram />
 }, {
     id: 4,
-    title: 'Tiktok',
+    title: 'TikTok',
     href: '/',
     icon: <FaTiktok />
 }, {
@@ -51,7 +51,7 @@ export const dashboardLinks = [
     },
     {
         id: 2,
-        title: 'Ordenes',
+        title: 'Pedidos',
         href: '/dashboard/orders',
         icon: <FaCartShopping size={25} />
     }

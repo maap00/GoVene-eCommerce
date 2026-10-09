@@ -82,7 +82,7 @@ export const OrderUserPage = () => {
               <p>{formatPrice(order.totalAmount)}</p>
             </div>
             <div className="flex justify-between">
-              <p>Envío (Standard)</p>
+              <p>Envío (estándar)</p>
               <p>{formatPrice(0)}</p>
             </div>
             <div className="flex justify-between text-black font-semibold">
@@ -94,7 +94,7 @@ export const OrderUserPage = () => {
           <h2 className="text-lg font-bold">Dirección</h2>
           <div className="border border-stone-300 p-5 flex-flex-col gap-5">
             <div className="space-y-1">
-              <h3 className="font-medium">Client:</h3>
+              <h3 className="font-medium">Cliente:</h3>
               <p>{order.customer.full_name}</p>
             </div>
             <div className="flex flex-col gap-1 text-sm">

@@ -8,8 +8,8 @@ interface Props {
 
 const tableHeader = [
     'ID',
-    'Date',
-    'State',
+    'Fecha',
+    'Estado',
     'Total'
 ]
 

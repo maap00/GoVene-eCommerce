@@ -36,7 +36,7 @@ export const FeatureInput = ({ control, errors }: Props) => {
   return (
    <div className="flex flex-col gap-2">
     <label htmlFor="" className="text-xs font-bold tracking-tight capitalize text-slate-900">
-        Caractarísticas:
+        Características:
     </label>
 
     <ul className="space-y-3 pl-5">
@@ -50,6 +50,7 @@ export const FeatureInput = ({ control, errors }: Props) => {
                     <button 
                         type="button"
                         onClick={()=>remove(index)}
+                        aria-label={`Quitar característica ${index + 1}`}
                         className="text-sm text-red-500 font-bold pr-2 hover:scale-110">
                         x
                     </button>                    
@@ -58,7 +59,7 @@ export const FeatureInput = ({ control, errors }: Props) => {
         ))}
     </ul>
     <input 
-        placeholder ="Detalles del Producto"
+        placeholder ="Escribe una característica del producto"
         type="text" 
         className={`border border-gray-300 py-1 5 text-sm rounded-md px-3 font-medium tracking-tighter text-slate-600 outline-none  focus:outline-none ${errors.features ? 'border-red-500' : ''}`}
         autoComplete="off" 

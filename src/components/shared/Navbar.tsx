@@ -36,14 +36,14 @@ export const Narbar = () => {
       </nav>
 
       <div className='flex  gap-5 items-center'>
-        <button className="relative" onClick={() => {
+        <button className="relative" aria-label="Limpiar datos locales" title="Limpiar datos locales" onClick={() => {
           localStorage.clear();
           window.location.reload();
         }}>
           <HiOutlineTrash size={25} />
         </button>
 
-        <button className="relative" onClick={() => openSheet('search')}>
+        <button className="relative" aria-label="Buscar productos" onClick={() => openSheet('search')}>
           <HiOutlineSearch size={25} />
         </button>
 
@@ -61,7 +61,7 @@ export const Narbar = () => {
             </Link>
           </div>
         ) : (
-          <Link to='/login'>
+          <Link to='/login' aria-label="Iniciar sesión">
             <HiOutlineUser size={25} />
           </Link>
         )
@@ -70,6 +70,7 @@ export const Narbar = () => {
 
         <button
           className='relative'
+          aria-label="Abrir pedido"
           onClick={() => openSheet('cart')}
         >
           <span className='absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full'>

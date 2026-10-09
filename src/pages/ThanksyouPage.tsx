@@ -23,7 +23,7 @@ export const ThanksyouPage = () => {
 	}, [navigate]);
 
 
-	if (isError) return <div>Loading data error</div>
+	if (isError) return <div>Error al cargar los datos del pedido</div>
 
 	if (isLoading || !data || isLoadingSession) return <Loader />;
 
@@ -132,7 +132,7 @@ export const ThanksyouPage = () => {
 						<div className='flex flex-col text-sm'>
 							<p className='font-semibold'>Métodos de pago:</p>
 							<p>
-								Deposito bancario - {formatPrice(data.totalAmount)}
+								Depósito bancario - {formatPrice(data.totalAmount)}
 							</p>
 						</div>
 
@@ -151,7 +151,7 @@ export const ThanksyouPage = () => {
 
 						<div className='flex flex-col text-sm'>
 							<p className='font-semibold'>Método de envío</p>
-							<p>Standard</p>
+							<p>Estándar</p>
 						</div>
 					</div>
 				</div>

@@ -16,7 +16,10 @@ export const useCreateOrder = () => {
             navigate(`/checkout/${data.id}/thanks-you`)
         },
         onError: error => {
-            toast.error(error.message, {
+            const message = error.message.includes('existencias')
+                ? error.message
+                : 'No se pudo procesar el pedido. Inténtalo de nuevo.';
+            toast.error(message, {
                 position: 'bottom-right'
             })
         }

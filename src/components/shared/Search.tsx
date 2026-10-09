@@ -30,10 +30,10 @@ return (
   <div className="py-5 px-7 flex gap-10 items-center border-b border-slate-200">
     <form className="flex gap-3 items-center flex-1" onSubmit={handleSearch}>
       <HiOutlineSearch size={25} />
-      <input type="text" className="outine-none w-full text-sm" placeholder='Que buscas?' value={searchTerm}
+      <input type="text" className="outine-none w-full text-sm" aria-label="Buscar productos" placeholder='¿Qué buscas?' value={searchTerm}
         onChange={e=> setSearchTerm(e.target.value)} />
     </form>
-    <button type="button" onClick={closeSheet}>
+    <button type="button" aria-label="Cerrar búsqueda" onClick={closeSheet}>
       <IoMdClose size={25} className='text-black' />
     </button>
   </div>
@@ -43,7 +43,7 @@ return (
     {searchResult.length > 0 ? (
     <ul>
       {searchResult.map(product => (
-        <li className="py-2 group">
+      <li key={product.id} className="py-2 group">
         <button className="flex items-center gap-3"
                 onClick={() => {
                   navigate(`/products/${product.slug}`);
@@ -67,7 +67,7 @@ return (
       ))}
     </ul>) : (
     <p className="text-sm text-gray-600">
-      There are no results
+      No se encontraron resultados
     </p>
     )}
 

@@ -28,6 +28,7 @@ export const MenuBar = ({
 	return (
 		<div className='flex flex-wrap gap-3'>
 			<button
+				aria-label="Encabezado 1"
 				onClick={() =>
 					editor.chain().focus().toggleHeading({ level: 1 }).run()
 				}
@@ -40,6 +41,7 @@ export const MenuBar = ({
 			</button>
 
 			<button
+				aria-label="Encabezado 2"
 				onClick={() =>
 					editor.chain().focus().toggleHeading({ level: 2 }).run()
 				}
@@ -52,6 +54,7 @@ export const MenuBar = ({
 			</button>
 
 			<button
+				aria-label="Encabezado 3"
 				onClick={() =>
 					editor.chain().focus().toggleHeading({ level: 3 }).run()
 				}
@@ -64,6 +67,7 @@ export const MenuBar = ({
 			</button>
 
 			<button
+				aria-label="Negrita"
 				onClick={() => editor.chain().focus().toggleBold().run()}
 				className={buttonClass(editor.isActive('bold'))}
 				type='button'
@@ -72,6 +76,7 @@ export const MenuBar = ({
 			</button>
 
 			<button
+				aria-label="Cursiva"
 				onClick={() => editor.chain().focus().toggleItalic().run()}
 				className={buttonClass(editor.isActive('italic'))}
 				type='button'
@@ -80,6 +85,7 @@ export const MenuBar = ({
 			</button>
 
 			<button
+				aria-label="Tachado"
 				onClick={() => editor.chain().focus().toggleStrike().run()}
 				className={buttonClass(editor.isActive('strike'))}
 				type='button'

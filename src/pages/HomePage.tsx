@@ -26,7 +26,7 @@ export const HomePage = () => {
         <div className="grid min-h-[500px] items-center gap-8 px-6 py-12 sm:px-10 md:grid-cols-[1.05fr_0.95fr] md:px-14 md:py-16">
           <div className="max-w-xl">
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.19em] text-cyan-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" /> Marketplace venezolano
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" /> Mercado digital venezolano
             </p>
             <p className="mb-3 text-lg font-semibold tracking-tight text-white">Go<span className="text-cyan-300">Vene</span></p>
             <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
@@ -34,7 +34,7 @@ export const HomePage = () => {
               <span className="text-cyan-300">En un solo lugar.</span>
             </h1>
             <p className="mt-6 max-w-lg text-sm leading-7 text-slate-300 sm:text-base">
-              Descubre marcas y productos de tecnología en un marketplace hecho para conectar a Venezuela con lo que necesita.
+              Descubre marcas y productos de tecnología en un mercado digital que conecta a Venezuela con lo que necesita.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#categorias" className="rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300">
@@ -119,7 +119,7 @@ export const HomePage = () => {
 
       <section className="mb-8 overflow-hidden rounded-3xl bg-cyan-50 px-6 py-12 text-center sm:px-10 md:py-16">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700">GoVene</p>
-        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">Un marketplace. Múltiples categorías. Todo GoVene.</h2>
+        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">Un mercado digital. Múltiples categorías. Todo GoVene.</h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-600 md:text-base">Explora los productos disponibles y encuentra tu próxima compra.</p>
         <Link to="/socios" className="mt-7 inline-flex rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800">
           Explorar catálogo <span aria-hidden="true" className="ml-2">↗</span>

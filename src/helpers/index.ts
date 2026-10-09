@@ -2,7 +2,7 @@ import type { Color, Product, VariantsProducts } from "../interface";
 
 //funcion para transformar precio a USD
 export const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('es-VE', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 2,
@@ -44,7 +44,7 @@ export const prepareProductData = (products: Product[]) => {
 export const formatDateLong = (date: string): string => {
     const dateObject = new Date(date);
 
-    return dateObject.toLocaleTimeString('es-Es', {
+    return dateObject.toLocaleDateString('es-VE', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -53,7 +53,7 @@ export const formatDateLong = (date: string): string => {
 }
 
 export const getStatus = (status: string): string => {
-    switch (status) {
+    switch (status.toLowerCase()) {
         case 'pending':
             return 'Pendiente';
         case 'paid':
@@ -62,6 +62,9 @@ export const getStatus = (status: string): string => {
             return 'Enviado';
         case 'delivered':
             return 'Entregado';
+        case 'cancelled':
+        case 'canceled':
+            return 'Cancelado';
         default:
             return status;
     }

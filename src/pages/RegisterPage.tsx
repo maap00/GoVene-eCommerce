@@ -49,7 +49,7 @@ export const RegisterPage = () => {
   return (
     <div className="h-full flex flex-col items-center mt-12 gap-5">
       <h1 className="text-4xl font-bold capitalize">
-        Create new Accound
+        Crear una cuenta
       </h1>
       {isPending ? (
         <Loading />
@@ -59,39 +59,39 @@ export const RegisterPage = () => {
             onSubmit={onRegister}>
             <input type="text"
               className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
-              placeholder='Name' {...register('fullName')} />
+              placeholder='Nombre completo' {...register('fullName')} />
             {errors.fullName &&
               <p className='text-red-500'>{errors.fullName.message}</p>}
 
             <input type="text"
               className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
-              placeholder='Phone' {...register('phone')} />
+              placeholder='Teléfono' {...register('phone')} />
             {errors.phone &&
               <p className='text-red-500'>{errors.phone.message}</p>}
 
 
             <input type="email"
               className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
-              placeholder='Insert email' {...register('email')} />
+              placeholder='Correo electrónico' {...register('email')} />
             {errors.email &&
               <p className='text-red-500'>{errors.email.message}</p>}
 
 
             <input type="password"
               className="border border-slate-200 text-black px-5 py-4 placeholder:text-black text-sm rounded-full w-full"
-              placeholder='Insert password' {...register('password')} />
+              placeholder='Contraseña' {...register('password')} />
             {errors.password &&
               <p className='text-red-500'>{errors.password.message}</p>}
 
 
             <button
               className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full mt-5 w-full">
-              Sign Up
+              Crear cuenta
             </button>
           </form>
           <p className="text-sm text-stone-800">
             <Link to='/login' className="underline ml-2">
-              Already Registered? Login
+              ¿Ya tienes cuenta? Inicia sesión
             </Link>
           </p>
         </>

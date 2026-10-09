@@ -33,7 +33,7 @@ export const signUp = async ({
         const userId = data.user?.id;
 
         if (!userId) {
-            throw new Error('Error not get userId')
+            throw new Error('No se pudo obtener el identificador del usuario')
         }
 
         // User Authentication
@@ -46,7 +46,7 @@ export const signUp = async ({
 
         if (signInError) {
             console.log(signInError)
-            throw new Error('Email or password incorrect')
+            throw new Error('El correo electrónico o la contraseña son incorrectos')
         }
 
         //3. Insert default rol (CUSTOMER)
@@ -60,7 +60,7 @@ export const signUp = async ({
 
         if (roleError) {
             console.log(roleError)
-            throw new Error('Error register role user')
+            throw new Error('No se pudo registrar el rol del usuario')
         }
 
         //4. Insert dates user to customer table
@@ -76,7 +76,7 @@ export const signUp = async ({
 
         if (customerError) {
             console.log(customerError);
-            throw new Error('Error insert user dates')
+            throw new Error('No se pudieron guardar los datos del usuario')
         }
 
         return data;
@@ -84,7 +84,7 @@ export const signUp = async ({
     } catch (error) {
 
         console.log(error);
-        throw new Error('Error insert new customer register')
+        throw new Error('No se pudo completar el registro. Inténtalo de nuevo')
 
     }
 }
@@ -100,7 +100,7 @@ export const signIn = async ({ email, password }: IAuthLogin) => {
 
     if (error) {
         console.log(error);
-        throw new Error('Error start session')
+        throw new Error('No se pudo iniciar sesión. Verifica tus datos e inténtalo de nuevo')
     };
 
     return data;
@@ -113,7 +113,7 @@ export const signOut = async () => {
 
     if (error) {
         console.log(error);
-        throw new Error('Error close session')
+        throw new Error('No se pudo cerrar la sesión')
     }
 }
 
@@ -122,7 +122,7 @@ export const getSession = async () => {
 
     if (error) {
         console.log(error);
-        throw new Error('Error get session')
+        throw new Error('No se pudo recuperar la sesión')
     }
 
     return data;

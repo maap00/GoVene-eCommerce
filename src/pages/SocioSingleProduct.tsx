@@ -108,7 +108,7 @@ export const SocioSingleProduct = () => {
                 price: selectedVariant.price,
                 quantity: count,
             });
-            toast.success('Product added', {
+            toast.success('Producto agregado al pedido', {
                 position: 'bottom-right'
             });
         }
@@ -193,7 +193,7 @@ export const SocioSingleProduct = () => {
                         </p>
                         <div className="flex gap-3">
                             {availableColors.map(color => (
-                                <button key={color} className={`w-8 h-8 rounded-full flex justify-center items-center ${selectedColor === color
+                                <button key={color} aria-label={`Seleccionar color ${colors[color].name}`} className={`w-8 h-8 rounded-full flex justify-center items-center ${selectedColor === color
                                     ? 'border border-slate-800'
                                     : ''}`}
                                     onClick={() => setSelectedColor(color)}
@@ -248,13 +248,13 @@ export const SocioSingleProduct = () => {
                                 <p className='text-sm font-medium'>Cantidad:</p>
 
                                 <div className='flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full'>
-                                    <button onClick={decrement} disabled={count === 1}>
+                                    <button aria-label="Disminuir cantidad" onClick={decrement} disabled={count === 1}>
                                         <LuMinus size={15} />
                                     </button>
                                     <span className='text-slate-500 text-sm'>
                                         {count}
                                     </span>
-                                    <button onClick={increment}>
+                                    <button aria-label="Aumentar cantidad" onClick={increment}>
                                         <LuPlus size={15} />
                                     </button>
                                 </div>
@@ -266,7 +266,7 @@ export const SocioSingleProduct = () => {
                                     className='bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[#e2e2e2]'
                                     onClick={addToCar}
                                 >
-                                    Agregar al carro
+                                    Agregar al pedido
                                 </button>
                                 <button
                                     className='bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full'

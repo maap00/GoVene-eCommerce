@@ -104,6 +104,7 @@ export const FormProduct = ({ titleForm }: Props) => {
             <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <button
+                        aria-label="Volver"
                         className="bg-white p-1.5 rounded-md shadow-sm border border-slate-200 transition-all group hover:slate-105"
                         onClick={() => navigate(-1)}
                     >
@@ -125,7 +126,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                     <Inputform
                         type='text'
                         placeholder='Ejemplo: iPhone 13 Pro Max'
-                        label='name'
+                        label='Nombre'
                         name='name'
                         register={register}
                         errors={errors}
@@ -138,7 +139,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                     <Inputform
                         type='text'
                         placeholder='Ejemplo: iPhone 13 Pro Max'
-                        label='slug'
+                        label='Identificador de URL'
                         name='slug'
                         register={register}
                         errors={errors}

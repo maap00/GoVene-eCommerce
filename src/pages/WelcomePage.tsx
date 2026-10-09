@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { WelcomeScene } from '../components/welcome/WelcomeScene';
 
 export const WelcomePage = () => {
-    const [city, setCity] = useState('Puerto Ordaz');
+        const [city, setCity] = useState('Puerto Ordaz');
     const navigate = useNavigate();
 
     const handleGo = () => {
@@ -22,13 +22,13 @@ export const WelcomePage = () => {
                     <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-2">
                         GoVene
                     </h1>
-                    <p className="text-lg text-gray-300 tracking-widest uppercase text-xs">e-commerce</p>
+                    <p className="text-lg text-gray-300 tracking-widest uppercase text-xs">Comercio electrónico</p>
                 </div>
 
                 <div className="space-y-6">
                     <div className="relative">
                         <label htmlFor="city" className="block text-sm font-medium text-gray-400 mb-2">
-                            Select your city
+                            Selecciona tu ciudad
                         </label>
                         <div className="relative">
                             <select
@@ -53,7 +53,7 @@ export const WelcomePage = () => {
                         onClick={handleGo}
                         className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition-all active:scale-95 hover:shadow-lg hover:shadow-blue-500/30"
                     >
-                        Go
+                        Continuar
                     </button>
                 </div>
             </div>
