@@ -1,7 +1,6 @@
 import { navbarLinks } from '../../constants/links'
 import { NavLink, Link } from 'react-router-dom'
 import { HiOutlineSearch, HiOutlineShoppingBag, HiOutlineUser, HiOutlineTrash } from 'react-icons/hi'
-import { FaBarsStaggered } from 'react-icons/fa6'
 import { Logo } from './Logo'
 import { useGlobalStore } from '../../store/global.store'
 import { useCartStore } from '../../store/cart.store'
@@ -11,7 +10,6 @@ import { upperCase } from '../../helpers'
 
 export const Narbar = () => {
   const openSheet = useGlobalStore((state) => state.openSheet);
-  const setActiveNavMobile = useGlobalStore((state) => state.setActiveNavMobile);
   const totalItemsInCart = useCartStore((state) => state.totalItemsInCart)
 
   const { session, isLoading } = useUser();
@@ -81,9 +79,6 @@ export const Narbar = () => {
         </button>
 
       </div>
-      <button className="md:hidden" onClick={() => setActiveNavMobile(true)}>
-        <FaBarsStaggered size={25} />
-      </button>
     </header>
   )
 }

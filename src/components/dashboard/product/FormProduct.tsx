@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
+import { type JSONContent } from "@tiptap/react"
 import { useForm } from "react-hook-form"
 import { productSchema, type ProductFormValues } from "../../../lib/validators"
 import { IoIosArrowBack } from "react-icons/io"
@@ -47,7 +48,7 @@ export const FormProduct = ({ titleForm }: Props) => {
             setValue('slug', product.slug)
             setValue('brand', product.brand)
             setValue('features', product.features.map((f: string) => ({ value: f })))
-            setValue('description', product.description)
+            setValue('description', product.description as unknown as JSONContent)
             setValue('images', product.images)
             setValue('variants', product.variants.map(v => ({
                 id: v.id,
@@ -179,18 +180,19 @@ export const FormProduct = ({ titleForm }: Props) => {
                     <Editor
                         setValue={setValue}
                         errors={errors}
-                        initialContent={product?.description}
+                        initialContent={product?.description as unknown as JSONContent}
                     />
                 </SectionFormProduct>
 
-                <div className="flex gap-3 absolute top-0 right-0">
+                <div className='flex gap-3 absolute top-0 right-0'>
                     <button
-                        className="btn-secondary-outline"
-                        type="button"
-                        onClick={() => navigate(-1)}>
+                        className='border border-slate-400 text-slate-600 py-2 px-3 text-sm font-medium rounded-md'
+                        type='button'
+                        onClick={() => navigate(-1)}
+                    >
                         Cancelar
                     </button>
-                    <button className="btn-primery" type="submit">
+                    <button className='bg-black text-white py-2 px-3 text-sm font-medium rounded-md' type='submit'>
                         Guardar
                     </button>
                 </div>

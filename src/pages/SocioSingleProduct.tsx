@@ -74,7 +74,7 @@ export const SocioSingleProduct = () => {
     // Actualizar el almacenamiento cuando cambia el color
 
     useEffect(() => {
-        if (selectedColor && colors[selectedColor] && !selectedStorage) {
+        if (selectedColor !== null && colors[selectedColor] && !selectedStorage) {
             setSelectedStorage(colors[selectedColor].storages[0]);
         }
     }, [selectedColor, colors, selectedStorage]);
@@ -82,7 +82,7 @@ export const SocioSingleProduct = () => {
     // obtener las variantes seleccionadas
 
     useEffect(() => {
-        if (selectedColor && selectedStorage) {
+        if (selectedColor !== null && selectedStorage) {
             const variant = product?.variants.find(
                 variant =>
                     variant.color === selectedColor &&
@@ -185,7 +185,9 @@ export const SocioSingleProduct = () => {
                         ))}
                     </ul>
 
-                    <div className="flex flex-col gap-3">
+                    {/* <div className="flex flex-col gap-3"> */}
+                    <div className={`${availableColors.length > 0 && availableColors[0] !== "" ? 'flex flex-col gap-3' : 'hidden'}`}>
+
                         <p>
                             Color: {selectedColor && colors[selectedColor].name}
                         </p>
@@ -212,20 +214,22 @@ export const SocioSingleProduct = () => {
                             Cantidad disponible
                         </p>
 
-                        {selectedColor && (
-                            <div className="flex gap-3">
-                                <select
-                                    className="border border-gray-300 rounded px-3 py-1"
-                                    value={selectedStorage || ''}
-                                    onChange={(e) => setSelectedStorage(e.target.value)}>
-                                    {colors[selectedColor].storages.map(storage => (
-                                        <option key={storage} value={storage}>
-                                            {storage}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
+                        {
+                            selectedColor !== null && colors[selectedColor] && (
+                                <div className="flex gap-3">
+                                    <select
+                                        className="border border-gray-300 rounded px-3 py-1"
+                                        value={selectedStorage || ''}
+                                        onChange={(e) => setSelectedStorage(e.target.value)}>
+                                        {colors[selectedColor].storages.map(storage => (
+                                            <option key={storage} value={storage}>
+                                                {storage}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )
+                        }
 
                     </div>
 

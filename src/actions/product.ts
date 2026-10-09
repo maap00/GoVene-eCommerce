@@ -205,6 +205,9 @@ export const createProduct = async (productInput: ProductInput) => {
 
     } catch (error) {
         console.log(error);
+        if (error instanceof Error) {
+            throw new Error(error.message);
+        }
         throw new Error('Error inesperado, vuelva a intentarlo');
     }
 

@@ -26,7 +26,7 @@ export const TableProduct = () => {
 
   const [page, setPage] = useState(1);
 
-  const { products, isLoading, totalProducts, count } = useProducts({ page });
+  const { products, isLoading, totalProducts } = useProducts({ page });
 
   const { mutate: deleteProduct, isPending: isDeleting } = useDeleteProduct();
 
@@ -56,7 +56,7 @@ export const TableProduct = () => {
 
   //const productsDoesNotExist = !products || products.length === 0;
 
-  if (!products || isLoading || !totalProducts || isDeleting) return <Loader />
+  if (!products || isDeleting) return <Loader />
 
   return (
     <div className="flex flex-col flex-1 border border-gray-200 rounded-lg p-5 bg-white">

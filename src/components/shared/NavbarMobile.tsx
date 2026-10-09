@@ -1,48 +1,68 @@
-
+import { NavLink } from 'react-router-dom'
+import { HiOutlineHome, HiOutlineTag, HiOutlineCube, HiOutlineCalendar, HiOutlineShoppingBag } from 'react-icons/hi'
 import { useGlobalStore } from '../../store/global.store'
-import { IoMdClose } from 'react-icons/io';
-import { Link, NavLink } from 'react-router-dom';
-import { navbarLinks } from '../../constants/links';
+
+const navigationItems = [
+    { label: 'Inicio', to: '/home', icon: HiOutlineHome, end: true },
+    // The existing /socios screen is the only implemented product category/catalog view.
+    { label: 'Categorías', to: '/socios', icon: HiOutlineTag },
+    { label: 'Productos', to: '/products', icon: HiOutlineCube, end: true },
+]
 
 export const NavbarMobile = () => {
-
-    const setActiveNavMobile = useGlobalStore(
-        (state) => state.setActiveNavMobile);
+    const openSheet = useGlobalStore((state) => state.openSheet)
 
     return (
-        <div className="bg-white text-black h-screen w-full shadow-lg animate-slide-in-left fixed  z-50 flex justify-center py-32">
-            <button
-                className="absolute top-5 right-5"
-                onClick={() => setActiveNavMobile(false)}
-            >
-                <IoMdClose size={30} className="text-black" />
-            </button>
-            <div className="flex flex-col gap-20">
-                <Link
-                    to="/"
-                    className="text-4xl font-bold tracking-tighter transtion-all"
-                    onClick={() => setActiveNavMobile(false)}>
-                    <p>
-                        Go
-                        <span className='text-cyan-600'>Vene</span>
-                    </p>
-                </Link>
-                <nav className="flex flex-col items-center gap-5">
-                    {navbarLinks.map(item => (
-                        <NavLink
-                            to={item.href}
-                            key={item.id}
-                            className={({ isActive }) =>
-                                `${isActive ? 'text-cyan-600 underline' : ''
-                                } transition-all duration-300 font-semibold text-xl hover:text-cyan-600 hover:underline `
-                            }
-                            onClick={() => setActiveNavMobile(false)}
-                        >
-                            {item.title}
-                        </NavLink>
-                    ))}
-                </nav>
+        <nav
+            aria-label="Navegación principal móvil"
+            className="fixed inset-x-0 bottom-0 z-40 px-3 pt-2 md:hidden"
+            style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}
+        >
+            <div className="mx-auto flex max-w-md items-stretch justify-around rounded-2xl border border-slate-200/80 bg-white/95 px-1 py-2 shadow-[0_-4px_24px_rgba(15,23,42,0.10)] backdrop-blur">
+                {navigationItems.map(({ label, to, icon: Icon, end }) => (
+                    <NavLink
+                        key={label}
+                        to={to}
+                        end={end}
+                        className={({ isActive }) => `flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-medium transition-colors ${isActive ? 'text-cyan-700' : 'text-slate-500 hover:text-slate-900'}`}
+                    >
+                        {({ isActive }) => (
+                            <>
+                                <span className={`grid h-7 w-10 place-items-center rounded-full ${isActive ? 'bg-cyan-50' : ''}`}>
+                                    <Icon size={21} strokeWidth={1.7} />
+                                </span>
+                                <span className="truncate">{label}</span>
+                                {isActive && <span className="h-0.5 w-4 rounded-full bg-cyan-600" />}
+                            </>
+                        )}
+                    </NavLink>
+                ))}
+
+                <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    title="Eventos aún no disponibles"
+                    className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-medium text-slate-300"
+                >
+                    <span className="grid h-7 w-10 place-items-center rounded-full">
+                        <HiOutlineCalendar size={21} strokeWidth={1.7} />
+                    </span>
+                    <span className="truncate">Eventos</span>
+                </button>
+
+                <button
+                    type="button"
+                    onClick={() => openSheet('cart')}
+                    className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-medium text-slate-500 transition-colors hover:text-slate-900"
+                    aria-label="Abrir pedido"
+                >
+                    <span className="grid h-7 w-10 place-items-center rounded-full">
+                        <HiOutlineShoppingBag size={21} strokeWidth={1.7} />
+                    </span>
+                    <span className="truncate">Pedido</span>
+                </button>
             </div>
-        </div>
+        </nav>
     )
 }

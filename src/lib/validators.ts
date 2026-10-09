@@ -72,14 +72,15 @@ export const productSchema = z.object({
 				price: z.number().min(0.01, 'El precio debe ser mayor a 0'),
 				storage: z.string().min(1, 'El almacenamiento es requerido'),
 				color: z
-					.string()
-					.regex(
-						/^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|(rgb|hsl)a?\(\s*([0-9]{1,3}\s*,\s*){2}[0-9]{1,3}\s*(,\s*(0|1|0?\.\d+))?\s*\))$/,
-						'El color debe ser un valor válido en formato hexadecimal, RGB o HSL'
-					),
+					.string().optional(),
+				// .regex(
+				// 	/^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|(rgb|hsl)a?\(\s*([0-9]{1,3}\s*,\s*){2}[0-9]{1,3}\s*(,\s*(0|1|0?\.\d+))?\s*\))$/,
+				// 	'El color debe ser un valor válido en formato hexadecimal, RGB o HSL'
+				// )
+
 				colorName: z
-					.string()
-					.min(1, 'El nombre del color es obligatorio'),
+					.string().optional()
+				// .min(1, 'El nombre del color es obligatorio'),
 			})
 		)
 		.min(1, 'Debe haber al menos una variante'),

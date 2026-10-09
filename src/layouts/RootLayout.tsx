@@ -14,10 +14,8 @@ export const RootLayout = () => {
 
     const isSheetOpen = useGlobalStore((state) => state.isSheetOpen);
 
-    const activeNavMobile = useGlobalStore((state) => state.activeNavMobile);
-
     return (
-        <div className='h-screen flex flex-col font-montserrat'>
+        <div className='min-h-screen flex flex-col pb-24 font-montserrat md:pb-0'>
             <Narbar />
 
             {pathname === '/home' && (
@@ -34,7 +32,7 @@ export const RootLayout = () => {
 
             {isSheetOpen && <Sheet />}
 
-            {activeNavMobile && <NavbarMobile />}
+            <NavbarMobile />
 
             <Footer />
         </div>

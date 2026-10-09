@@ -83,7 +83,9 @@ export const CardProduct = ({
             <div className="flex flex-col gap-1 items-center">
                 <p className="text-[15px] font-medium">{name}</p>
                 <p className="text-[15px] font-medium">{formatPrice(price)}</p>
-                <div className="flex gap-3">
+
+
+                <div className={`${colors.length > 0 && colors[0].color !== "" ? 'flex gap-3' : 'hidden'}`}>
                     {colors.map(color => (
                         <span
                             key={color.color}
